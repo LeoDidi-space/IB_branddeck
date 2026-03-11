@@ -1,0 +1,2032 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>I&B — Brand Identity Deck</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  /* ── TOKENS ── */
+  :root {
+    --gold: #b8873a;
+    --gold-light: #d4a85a;
+    --navy: #1a2540;
+    --cream: #F5F3EE;
+    --cream-dark: #EAE7E0;
+    --white: #FEFEFE;
+    --muted: #8A8680;
+    --ink: #1A1814;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background:var(--cream); color:var(--ink);
+    font-family:'Jost',sans-serif; font-weight:300;
+    padding-top:56px; /* offset for fixed nav */
+  }
+
+  /* ── PATTERN SWITCHER NAV ── */
+  .pattern-nav {
+    position:fixed; top:0; left:0; right:0; z-index:9999;
+    height:56px;
+    background:#1a2540;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:flex; align-items:center; justify-content:space-between;
+    padding:0 40px;
+  }
+  .nav-logo {
+    display:flex; align-items:center; gap:12px;
+    font-size:9px; letter-spacing:4px; color:rgba(255,255,255,0.4);
+    text-transform:uppercase; white-space:nowrap; flex-shrink:0;
+  }
+  .nav-pills {
+    display:flex; align-items:center; gap:4px;
+    background:rgba(255,255,255,0.07);
+    border-radius:100px; padding:4px;
+  }
+  .nav-pill {
+    padding:6px 20px; border-radius:100px;
+    font-size:9px; letter-spacing:3px; text-transform:uppercase;
+    color:rgba(255,255,255,0.45); cursor:pointer;
+    border:none; background:transparent;
+    transition:all 0.2s ease; white-space:nowrap;
+    font-family:'Jost',sans-serif; font-weight:400;
+  }
+  .nav-pill:hover { color:rgba(255,255,255,0.8); }
+  .nav-pill.active { background:var(--gold); color:#1a2540; font-weight:500; }
+
+  /* Hamburger — hidden on desktop */
+  .nav-hamburger {
+    display:none; flex-direction:column; gap:5px;
+    cursor:pointer; background:none; border:none; padding:6px;
+  }
+  .nav-hamburger span {
+    display:block; width:22px; height:1.5px;
+    background:rgba(255,255,255,0.55); border-radius:2px;
+    transition:all 0.28s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity:0; transform:scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+
+  /* Mobile drawer */
+  .nav-drawer {
+    position:fixed; top:56px; left:0; right:0; z-index:9998;
+    background:#1a2540;
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    display:none; flex-direction:column; gap:2px; padding:12px 16px 16px;
+  }
+  .nav-drawer.open { display:flex; }
+  .nav-drawer .nav-pill {
+    text-align:left; border-radius:8px; padding:12px 16px;
+    font-size:10px; width:100%;
+  }
+
+  /* lang toggle */
+  .lang-toggle {
+    padding:6px 16px; border-radius:100px;
+    font-size:9px; letter-spacing:3px; text-transform:uppercase;
+    color:rgba(255,255,255,0.5); cursor:pointer;
+    border:1px solid rgba(255,255,255,0.18); background:transparent;
+    transition:all 0.2s ease; margin-left:12px; flex-shrink:0;
+    font-family:'Jost',sans-serif; font-weight:400;
+  }
+  .lang-toggle:hover { color:rgba(255,255,255,0.9); border-color:rgba(255,255,255,0.4); }
+
+  @media(max-width:680px) {
+    .nav-pills { display:none; }
+    .nav-hamburger { display:flex; }
+    .pattern-nav { padding:0 20px; }
+    .lang-toggle { margin-left:8px; padding:6px 10px; }
+  }
+
+  /* ── PATTERN PANELS ── */
+  .pattern-panel { display:none; }
+  .pattern-panel.active { display:block; }
+
+  /* ── COVER ── */
+  .cover {
+    width:100%; min-height:calc(100vh - 56px); background:var(--navy);
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    position:relative; overflow:hidden; padding:80px 40px;
+  }
+  .cover::before {
+    content:''; position:absolute; inset:0;
+    background:radial-gradient(ellipse at 30% 60%, rgba(184,135,58,0.08) 0%, transparent 60%),
+               radial-gradient(ellipse at 70% 30%, rgba(255,255,255,0.03) 0%, transparent 50%);
+    pointer-events:none;
+  }
+  .cover-rule-t { position:absolute; top:44px; left:56px; right:56px; height:1px; background:rgba(255,255,255,0.08); }
+  .cover-rule-b { position:absolute; bottom:44px; left:56px; right:56px; height:1px; background:rgba(255,255,255,0.08); }
+  .cover-eyebrow { font-size:9px; letter-spacing:5px; color:var(--gold); text-transform:uppercase; margin-bottom:56px; }
+  .cover-mark {}
+  .cover-title {
+    font-family:'Cormorant Garamond',serif; font-weight:300;
+    font-size:clamp(38px,6vw,68px); color:var(--white); letter-spacing:8px;
+    text-align:center; margin-top:52px; line-height:1.1;
+  }
+  .cover-title span { color:var(--gold); }
+  .cover-sub { font-size:9.5px; letter-spacing:4px; color:rgba(255,255,255,0.3); margin-top:18px; text-transform:uppercase; }
+  .cover-badge { position:absolute; bottom:52px; right:60px; font-size:9px; letter-spacing:3px; color:rgba(255,255,255,0.2); }
+
+  /* ── SECTIONS ── */
+  .section { max-width:1100px; margin:0 auto; padding:96px 60px; }
+  .sec-label {
+    font-size:8.5px; letter-spacing:5px; color:var(--gold); text-transform:uppercase;
+    margin-bottom:44px; display:flex; align-items:center; gap:14px;
+  }
+  .sec-label::after { content:''; flex:1; height:1px; background:var(--cream-dark); max-width:100px; }
+  .sec-h { font-family:'Cormorant Garamond',serif; font-weight:300; font-size:clamp(30px,4vw,50px); color:var(--navy); line-height:1.15; margin-bottom:20px; }
+  .sec-p { font-size:13.5px; line-height:1.95; color:var(--muted); max-width:560px; }
+
+  /* story */
+  .story-bg { background:var(--white); border-top:1px solid var(--cream-dark); }
+  .story-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; margin-top:56px; }
+  .story-quote { font-family:'Cormorant Garamond',serif; font-size:clamp(20px,2.2vw,28px); font-style:italic; font-weight:300; color:var(--navy); line-height:1.55; padding-left:24px; border-left:2px solid var(--gold); }
+  .kw-list { display:flex; flex-direction:column; gap:14px; margin-top:36px; }
+  .kw { display:flex; align-items:center; gap:14px; font-size:10.5px; letter-spacing:3px; color:var(--navy); text-transform:uppercase; }
+  .kw-dot { width:5px; height:5px; border-radius:50%; background:var(--gold); flex-shrink:0; }
+
+  /* lockups */
+  .lockups-bg { background:var(--cream); }
+  .lockups-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; }
+  .lk { background:var(--white); padding:52px 36px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:22px; min-height:200px; }
+  .lk.dark { background:var(--navy); }
+  .lk.mid  { background:var(--cream-dark); }
+  .lk-cap { font-size:7.5px; letter-spacing:3.5px; color:var(--muted); text-transform:uppercase; text-align:center; }
+  .lk.dark .lk-cap { color:rgba(255,255,255,0.3); }
+
+  /* palette */
+  .palette-bg { background:var(--navy); }
+  .palette-bg .sec-h { color:var(--white); }
+  .palette-bg .sec-p { color:rgba(255,255,255,0.38); }
+  .palette-bg .sec-label { color:var(--gold-light); }
+  .palette-bg .sec-label::after { background:rgba(255,255,255,0.1); }
+  .swatches { display:flex; gap:2px; margin-top:56px; }
+  .sw { flex:1; min-height:190px; padding:22px 18px; display:flex; flex-direction:column; justify-content:flex-end; transition:flex 0.35s ease; cursor:default; }
+  .sw:hover { flex:1.5; }
+  .sw-name { font-size:9px; letter-spacing:2.5px; text-transform:uppercase; margin-bottom:5px; }
+  .sw-hex  { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:300; opacity:0.65; }
+  .sw-role { font-size:7.5px; letter-spacing:2px; text-transform:uppercase; opacity:0.45; margin-top:3px; }
+
+  /* typography */
+  .type-bg { background:var(--white); }
+  .type-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:56px; }
+  .type-cell { background:var(--cream); padding:48px 44px; }
+  .type-badge { font-size:8px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:24px; }
+  .type-rule { height:1px; background:var(--cream-dark); margin:20px 0; }
+  .type-name { font-size:10.5px; letter-spacing:2px; color:var(--navy); text-transform:uppercase; margin-bottom:4px; }
+  .type-detail { font-size:9.5px; color:var(--muted); letter-spacing:0.5px; }
+  .type-sample { font-size:12.5px; line-height:1.85; color:var(--muted); }
+
+  /* usage rules */
+  .rules-bg { background:var(--cream); }
+  .rules-grid { display:grid; grid-template-columns:1fr 1fr; gap:2px; margin-top:56px; }
+  .rule-cell { background:var(--white); padding:44px; }
+  .rule-title { font-size:8.5px; letter-spacing:3.5px; text-transform:uppercase; color:var(--gold); margin-bottom:24px; display:flex; align-items:center; gap:10px; }
+  .badge-do   { width:17px;height:17px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:9px; flex-shrink:0; }
+  .badge-dont { width:17px;height:17px;border-radius:50%;background:#C0392B;color:white;display:flex;align-items:center;justify-content:center;font-size:9px; flex-shrink:0; }
+  .rule-body { font-size:12px; color:var(--muted); line-height:1.85; }
+
+  /* mockups */
+  .mock-bg { background:var(--cream-dark); }
+  .mock-grid { display:grid; grid-template-columns:1fr 1fr; gap:40px; margin-top:56px; }
+  .mock-label { font-size:8px; letter-spacing:4px; color:var(--muted); text-transform:uppercase; margin-bottom:10px; }
+  .card { width:100%; aspect-ratio:1.75; border-radius:6px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.13); }
+  .card-front { background:var(--navy); display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;height:100%; }
+  .card-sub-text { font-size:7.5px;letter-spacing:4px;color:rgba(255,255,255,0.4);text-transform:uppercase; }
+  .card-back { background:var(--cream); display:flex;flex-direction:column;justify-content:space-between;padding:24px 28px;width:100%;height:100%; }
+  .card-person-name { font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:400;color:var(--navy);margin-bottom:2px; }
+  .card-role { font-size:7.5px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px; }
+  .card-contact { font-size:9px;color:var(--muted);line-height:1.9; }
+  .card-co { font-size:7px;letter-spacing:3px;color:var(--muted);text-transform:uppercase; }
+  .stamp-row { background:var(--white); padding:44px; border-radius:4px; display:flex; align-items:center; justify-content:center; gap:48px; }
+  .stamp-circle { width:108px;height:108px;border-radius:50%;border:1.5px solid var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px; }
+  .stamp-inner-text { font-size:6px;letter-spacing:3.5px;color:var(--navy);text-transform:uppercase;opacity:0.55; }
+  .fav-row { background:var(--white); padding:28px 32px; border-radius:4px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+  .fav-box { display:flex;flex-direction:column;align-items:center;gap:7px; }
+  .fav-sz { font-size:7.5px;letter-spacing:2px;color:var(--muted); }
+
+  /* email sig */
+  .sig-bg { background:var(--white); }
+  .sig-demo { background:var(--cream); padding:44px 48px; border-radius:4px; margin-top:56px; display:flex; align-items:center; gap:30px; border-left:2.5px solid var(--gold); }
+  .sig-divider { width:1px; height:60px; background:var(--cream-dark); flex-shrink:0; }
+  .sig-name { font-family:'Cormorant Garamond',serif;font-size:21px;font-weight:400;color:var(--navy);margin-bottom:3px; }
+  .sig-title { font-size:8.5px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px; }
+  .sig-contact { font-size:11px;color:var(--muted);line-height:1.85; }
+  .sig-co { font-size:8px;letter-spacing:2.5px;color:var(--muted);text-transform:uppercase;margin-top:8px; }
+
+  /* footer */
+  footer { background:var(--navy); padding:52px 60px; display:flex; align-items:center; justify-content:space-between; }
+  .ft-copy { font-size:8.5px;letter-spacing:3px;color:rgba(255,255,255,0.2);text-transform:uppercase; }
+  .ft-pat  { font-family:'Cormorant Garamond',serif;font-size:12px;color:rgba(255,255,255,0.15);letter-spacing:2px; }
+
+  /* reveal animation — visible by default, JS adds will-animate */
+  .reveal { opacity:1; transform:translateY(0); transition:opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.will-animate { opacity:0; transform:translateY(22px); }
+  .reveal.visible { opacity:1; transform:translateY(0); }
+
+  /* feedback section */
+  .feedback-bg { background: var(--navy); }
+  .feedback-bg .sec-h { color: var(--white); }
+  .feedback-bg .sec-p { color: rgba(255,255,255,0.38); }
+  .feedback-bg .sec-label { color: var(--gold-light); }
+  .feedback-bg .sec-label::after { background: rgba(255,255,255,0.1); }
+  .fb-patterns {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    justify-content: center; margin: 48px 0 40px;
+  }
+  .fb-card input[type="radio"] { display: none; }
+  .fb-card-inner {
+    display: flex; flex-direction: column; align-items: center; gap: 20px;
+    padding: 32px 24px; border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.12);
+    cursor: pointer; transition: all 0.25s ease;
+    min-width: 180px; color: rgba(255,255,255,0.55);
+    font-family: 'Jost', sans-serif; font-size: 11px;
+    letter-spacing: 2px; text-transform: uppercase; text-align: center;
+  }
+  .fb-card-inner:hover { border-color: rgba(184,135,58,0.5); color: rgba(255,255,255,0.85); }
+  .fb-card input:checked + .fb-card-inner {
+    border-color: var(--gold); color: var(--gold-light);
+    background: rgba(184,135,58,0.08);
+  }
+  .fb-card-none .fb-card-inner { min-width: 140px; justify-content: center; }
+  .fb-textarea {
+    width: 100%; max-width: 640px; min-height: 120px;
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px; color: var(--white); font-family: 'Jost', sans-serif;
+    font-size: 13px; font-weight: 300; padding: 16px 20px;
+    resize: vertical; outline: none; display: block; margin: 0 auto 32px;
+    transition: border-color 0.2s ease; box-sizing: border-box;
+  }
+  .fb-textarea::placeholder { color: rgba(255,255,255,0.25); }
+  .fb-textarea:focus { border-color: rgba(184,135,58,0.5); }
+  .fb-submit {
+    display: block; margin: 0 auto;
+    padding: 12px 40px; border-radius: 100px;
+    background: transparent; border: 1px solid var(--gold);
+    color: var(--gold-light); font-family: 'Jost', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    cursor: pointer; transition: all 0.25s ease;
+  }
+  .fb-submit:hover { background: var(--gold); color: var(--navy); }
+  .fb-submit:disabled { opacity: 0.4; cursor: not-allowed; }
+  .fb-success {
+    text-align: center; padding: 40px 0;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; font-weight: 300; color: var(--gold-light);
+    letter-spacing: 1px; display: none;
+  }
+  .fb-error {
+    text-align: center; margin-top: 16px;
+    font-family: 'Jost', sans-serif; font-size: 11px;
+    letter-spacing: 1px; color: #e07070; display: none;
+  }
+  @media(max-width:680px) {
+    .fb-patterns { gap: 12px; }
+    .fb-card-inner { min-width: 140px; padding: 24px 16px; }
+  }
+
+  /* responsive */
+  @media(max-width:768px) {
+    .section { padding:60px 24px; }
+    .story-grid,.type-grid,.lockups-grid,.rules-grid,.mock-grid { grid-template-columns:1fr; }
+    .swatches { flex-wrap:wrap; }
+    .sw { flex:1 0 40%; min-height:130px; }
+    footer { flex-direction:column; gap:14px; text-align:center; }
+    .cover-badge { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ FIXED NAV ══════════ -->
+<nav class="pattern-nav">
+  <div class="nav-logo" data-i18n="nav-logo">I&amp;B · Brand Deck</div>
+  <div class="nav-pills">
+    <button class="nav-pill active" onclick="switchPattern(1)">01 · Single Line</button>
+    <button class="nav-pill" onclick="switchPattern(2)">02 · Illuminate Rays</button>
+    <button class="nav-pill" onclick="switchPattern(3)">03 · 人 Hito Arch</button>
+  </div>
+  <button class="lang-toggle" id="langToggle" onclick="toggleLang()">JP</button>
+  <button class="nav-hamburger" id="hamburger" onclick="toggleDrawer()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="nav-drawer" id="navDrawer">
+  <button class="nav-pill active" onclick="switchPattern(1);toggleDrawer()">01 · Single Line Monogram</button>
+  <button class="nav-pill" onclick="switchPattern(2);toggleDrawer()">02 · Illuminate Rays + Bridge</button>
+  <button class="nav-pill" onclick="switchPattern(3);toggleDrawer()">03 · 人 Hito Arch</button>
+</div>
+
+<!-- ══════════════════════════════════════════ -->
+<!--  PATTERN 1 — SINGLE LINE MONOGRAM         -->
+<!-- ══════════════════════════════════════════ -->
+<div class="pattern-panel active" id="panel-1">
+
+<section class="cover">
+  <div class="cover-rule-t"></div>
+  <div class="cover-rule-b"></div>
+  <div class="cover-eyebrow" data-i18n="p1-eyebrow">Brand Identity Proposal · 株式会社 I&amp;B</div>
+  <div class="cover-mark">
+    <svg width="200" height="68" viewBox="35 50 105 38" fill="none">
+      <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#FEFEFE" stroke-width="1.5" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <h1 class="cover-title" data-i18n="p1-cover-title">Pattern <span>01</span><br/>Single Line Monogram</h1>
+  <p class="cover-sub" data-i18n="p1-cover-sub">Illuminate Bridge · Brand System</p>
+  <div class="cover-badge" data-i18n="p1-cover-badge">Design Pattern 01 / 03</div>
+</section>
+
+<section class="story-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-brand-story">01 · Brand Story</div>
+    <h2 class="sec-h" data-i18n="p1-story-h">Two arches.<br/>One horizon.<br/>One shared future.</h2>
+    <div class="story-grid">
+      <div>
+        <p class="sec-p" data-i18n="p1-story-p1">The Single Line Monogram reduces I&amp;B's philosophy to its most essential gesture — two arches drawn with quiet confidence, resting on a single shared line. The left arch, in deep navy, stands for one person. The right arch, in warm gold, stands for another. The line beneath them is not a base; it is a bridge.</p>
+        <br/>
+        <p class="sec-p" data-i18n="p1-story-p2">This is not a complicated mark. It was never meant to be. The strength of Illuminate Bridge has always been in the clarity of its purpose — to connect people, illuminate the path between them, and move forward with sincerity.</p>
+        <br/>
+        <p class="sec-p" data-i18n="p1-story-p3">Decades from now, this mark will read the same. Precise enough for a business card emboss. Confident enough to stand alone on a signboard. Warm enough to feel human.</p>
+      </div>
+      <div>
+        <blockquote class="story-quote">"人と人の架け橋になる。<br/>To become a bridge<br/>between people."</blockquote>
+        <div class="kw-list">
+          <div class="kw"><div class="kw-dot"></div>人 · Human connection at the core</div>
+          <div class="kw"><div class="kw-dot"></div>橋 · The bridge — where two become one</div>
+          <div class="kw"><div class="kw-dot"></div>光 · Illuminate — warmth &amp; clarity</div>
+          <div class="kw"><div class="kw-dot"></div>挑戦 · Challenge &amp; bold ambition</div>
+          <div class="kw"><div class="kw-dot"></div>誠実 · Sincerity &amp; lasting trust</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lockups-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-lockups">02 · Logo Lockups</div>
+    <h2 class="sec-h" data-i18n="h-lockups">Mark, wordmark,<br/>and full lockup.</h2>
+    <p class="sec-p" data-i18n="p1-lockups-p">Three configurations for every context — from favicon to signage.</p>
+  </div>
+  <div class="lockups-grid" style="max-width:1100px;margin:0 auto 0;padding:0;">
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="35 50 105 35" style="width:110px;height:auto;">
+        <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-icon-light">Icon Only · Light</div>
+    </div>
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146.04 29.07" style="width:200px;height:auto;">
+        <text transform="translate(95.55 19.47)" fill="#1a2540" font-family="'Helvetica Neue',Helvetica,sans-serif" font-size="19.96" font-style="italic" letter-spacing=".1em"><tspan x="0" y="0">I &amp; B</tspan></text>
+        <path d="M8.75,26C8.75,9.33,14.75,1,26.75,1s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M44.75,26c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1=".75" y1="26.77" x2="88.75" y2="26.77" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-wm-light">Icon + Wordmark · Light</div>
+    </div>
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.71 75.97" style="width:140px;height:auto;">
+        <text transform="translate(4.09 44.89)" fill="#1a2540" font-family="'Helvetica Neue',Helvetica,sans-serif" font-size="19.96" letter-spacing=".1em"><tspan x="0" y="0">illuminate</tspan></text>
+        <text transform="translate(4.09 66.38)" fill="#1a2540" font-family="'Helvetica Neue',Helvetica,sans-serif" font-size="19.96" letter-spacing=".1em"><tspan x="0" y="0">bridge</tspan></text>
+        <path d="M6.16,18.32C6.16,6.58,10.39.7,18.85.7s12.68,5.87,12.68,17.61" stroke="#1a2540" stroke-width="1.41" stroke-linecap="round" fill="none"/>
+        <path d="M31.53,18.32C31.53,6.58,35.76.7,44.21.7s12.68,5.87,12.68,17.61" stroke="#b8873a" stroke-width="1.41" stroke-linecap="round" fill="none"/>
+        <line x1=".53" y1="18.86" x2="62.53" y2="18.86" stroke="#1a2540" stroke-width="1.06" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-fn-light">Icon + Full Name · Light</div>
+    </div>
+    <div class="lk dark reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="35 50 105 35" style="width:110px;height:auto;">
+        <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#FEFEFE" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-icon-dark">Icon Only · Dark</div>
+    </div>
+    <div class="lk dark reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 146.04 29.07" style="width:200px;height:auto;">
+        <text transform="translate(95.55 19.47)" fill="#FEFEFE" font-family="'Helvetica Neue',Helvetica,sans-serif" font-size="19.96" font-style="italic" letter-spacing=".1em"><tspan x="0" y="0">I &amp; B</tspan></text>
+        <path d="M8.75,26C8.75,9.33,14.75,1,26.75,1s18,8.33,18,25" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M44.75,26c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1=".75" y1="26.77" x2="88.75" y2="26.77" stroke="#FEFEFE" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-wm-dark">Icon + Wordmark · Dark</div>
+    </div>
+    <div class="lk mid reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="35 50 105 35" style="width:110px;height:auto;">
+        <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/>
+        <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-mono">Monochrome · Neutral</div>
+    </div>
+  </div>
+</section>
+
+<section class="palette-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-colors">03 · Color System</div>
+    <h2 class="sec-h" data-i18n="p1-colors-h">A palette built on<br/>trust and warmth.</h2>
+    <p class="sec-p" data-i18n="p1-colors-p">Navy anchors authority and longevity. Gold carries the warmth, humanity, and the spirit of "illuminate." Together they never go out of fashion.</p>
+  </div>
+  <div class="swatches" style="max-width:1100px;margin:0 auto;padding:0 60px 96px;">
+    <div class="sw" style="background:#1a2540;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Deep Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#1A2540</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Primary · Trust</div></div>
+    <div class="sw" style="background:#2E3D68;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Mid Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#2E3D68</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Support · Depth</div></div>
+    <div class="sw" style="background:#b8873a;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#B8873A</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Accent · Illuminate</div></div>
+    <div class="sw" style="background:#D4A85A;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold Light</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#D4A85A</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Tint · Warmth</div></div>
+    <div class="sw" style="background:#F5F3EE;"><div class="sw-name" style="color:#8A8680;">Cream</div><div class="sw-hex" style="color:#B0ADA8;">#F5F3EE</div><div class="sw-role" style="color:#C0BDB8;">BG · Paper</div></div>
+    <div class="sw" style="background:#FEFEFE;border:1px solid #EAE7E0;"><div class="sw-name" style="color:#8A8680;">White</div><div class="sw-hex" style="color:#B0ADA8;">#FEFEFE</div><div class="sw-role" style="color:#C0BDB8;">BG · Clean</div></div>
+  </div>
+</section>
+
+<section class="type-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-type">04 · Typography</div>
+    <h2 class="sec-h" data-i18n="p1-type-h">The typeface that<br/>comes with the mark.</h2>
+    <p class="sec-p" data-i18n="p1-type-p">Helvetica Neue is the native font of this logo. For headlines and display text, Cormorant Garamond adds warmth and elegance.</p>
+  </div>
+  <div class="type-grid" style="max-width:1100px;margin:0 auto;padding:0 0 96px;">
+    <div class="type-cell reveal">
+      <div class="type-badge">Logo · Body · UI Labels</div>
+      <div style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-weight:300;font-size:48px;color:var(--navy);line-height:1;margin-bottom:14px;letter-spacing:3px;">I &amp; B</div>
+      <div style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-style:italic;font-size:32px;font-weight:300;color:var(--navy);letter-spacing:3px;margin-bottom:14px;line-height:1;">I &amp; B</div>
+      <div class="type-rule"></div>
+      <div class="type-name">Helvetica Neue</div>
+      <div class="type-detail">Light · Regular · Italic · Medium</div>
+      <div class="type-rule"></div>
+      <div class="type-sample" style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-weight:300;">株式会社 I&amp;B · illuminate bridge<br/>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz · 0123456789</div>
+    </div>
+    <div class="type-cell reveal">
+      <div class="type-badge">Headlines · Quotes · Presentation</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:300;color:var(--navy);line-height:1;margin-bottom:14px;">Illuminate<br/><em>Bridge</em></div>
+      <div class="type-rule"></div>
+      <div class="type-name">Cormorant Garamond</div>
+      <div class="type-detail">Light 300 · Regular 400 · Italic</div>
+      <div class="type-rule"></div>
+      <div class="type-sample" style="font-family:'Cormorant Garamond',serif;font-size:15px;">人と人の架け橋になる。<br/>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz · 0123456789</div>
+    </div>
+  </div>
+</section>
+
+<section class="rules-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-rules">05 · Usage Rules</div>
+    <h2 class="sec-h" data-i18n="h-rules">How to use it,<br/>and how not to.</h2>
+    <p class="sec-p" data-i18n="p1-rules-p">Consistency builds recognition over time. These rules protect the integrity of the mark across every application.</p>
+  </div>
+  <div class="rules-grid" style="max-width:1100px;margin:0 auto;padding:0 0 96px;">
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-do">✓</span> <span data-i18n="p1-rule1-title">Clear Space</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:28px 0;">
+        <div style="border:1px dashed #b8873a;padding:24px;position:relative;">
+          <svg viewBox="35 50 105 35" style="width:110px;height:auto;">
+            <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <div style="position:absolute;top:3px;left:50%;transform:translateX(-50%);font-size:6.5px;color:#b8873a;letter-spacing:1.5px;white-space:nowrap;">min. clear space = height × 0.5</div>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p1-rule1-body">Always maintain clear space equal to half the mark's height on all sides. Never crowd the logo with other elements.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-do">✓</span> <span data-i18n="p1-rule2-title">Minimum Size</span></div>
+      <div style="display:flex;align-items:flex-end;justify-content:center;gap:28px;padding:28px 0;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <svg viewBox="35 50 105 35" style="width:50px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:7.5px;letter-spacing:1.5px;color:var(--muted);">24px digital</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <svg viewBox="35 50 105 35" style="width:80px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:7.5px;letter-spacing:1.5px;color:var(--muted);">10mm print</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <svg viewBox="35 50 105 35" style="width:110px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:7.5px;letter-spacing:1.5px;color:var(--gold);">Preferred</span>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p1-rule2-body">Below 24px digitally or 10mm in print, use text-only lockup to preserve legibility.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-dont">✗</span> <span data-i18n="p1-rule3-title">Do Not Distort</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:40px;padding:28px 0;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.35;">
+          <svg viewBox="35 50 105 35" style="width:140px;height:22px;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">Stretched</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.35;">
+          <svg viewBox="35 50 105 35" style="width:80px;height:80px;transform:rotate(20deg);"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">Rotated</span>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p1-rule3-body">Never stretch, rotate, or skew the mark. Always scale uniformly from a corner.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-dont">✗</span> <span data-i18n="p1-rule4-title">Approved Colors Only</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:28px 0;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.35;">
+          <svg viewBox="35 50 105 35" style="width:110px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#3498DB" stroke-width="2" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#E74C3C" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">Wrong colors</span>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p1-rule4-body">Only use Navy + Gold (color), full Navy (1-color), or full White (reversed). No other combinations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="mock-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-apps">06 · Applications</div>
+    <h2 class="sec-h" data-i18n="h-apps">The mark in the<br/>real world.</h2>
+    <p class="sec-p" data-i18n="p1-apps-p">From the first handshake to the digital touchpoint — every application should feel considered and consistent.</p>
+  </div>
+  <div class="mock-grid" style="max-width:1100px;margin:0 auto;padding:0 60px 96px;">
+    <div>
+      <div class="mock-label" data-i18n="mock-card-front">Business Card — Front</div>
+      <div class="card"><div class="card-front">
+        <svg viewBox="35 50 105 35" style="width:100px;height:auto;">
+          <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#FEFEFE" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+        <div class="card-sub-text">illuminate bridge</div>
+      </div></div>
+      <div class="mock-label" style="margin-top:20px;" data-i18n="mock-card-back">Business Card — Back</div>
+      <div class="card"><div class="card-back">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <svg viewBox="35 50 105 35" style="width:40px;height:auto;">
+              <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-style:italic;font-size:14px;letter-spacing:1.5px;color:#1a2540;">I &amp; B</span>
+          </div>
+          <div class="card-person-name">山田 太郎</div>
+          <div class="card-role">代表取締役 · CEO</div>
+        </div>
+        <div>
+          <div class="card-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7910171f16391015150c141017180d1c541b0b101d1e1c571a16571309">[email&#160;protected]</a><br/>illuminate-bridge.co.jp</div>
+          <div class="card-co" style="margin-top:8px;">株式会社 I&amp;B · Illuminate Bridge Co., Ltd.</div>
+        </div>
+      </div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div>
+        <div class="mock-label" data-i18n="mock-stamp">Stamp &amp; Emboss</div>
+        <div class="stamp-row">
+          <div class="stamp-circle">
+            <svg viewBox="35 50 105 35" style="width:52px;height:auto;">
+              <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <div class="stamp-inner-text">株式会社</div>
+          </div>
+          <div style="display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--cream);padding:28px 24px;border-radius:4px;">
+            <svg viewBox="35 50 105 35" style="width:80px;height:auto;filter:drop-shadow(1px 1px 0 rgba(255,255,255,0.85)) drop-shadow(-1px -1px 0 rgba(0,0,0,0.1));">
+              <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#C4B99A" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#C4B99A" stroke-width="2" stroke-linecap="round" fill="none"/>
+              <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#C4B99A" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            <div style="font-size:7px;letter-spacing:3px;color:#B0A890;text-transform:uppercase;">Emboss</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mock-label" data-i18n="mock-fav">Favicon / App Icon</div>
+        <div class="fav-row">
+          <div class="fav-box"><div style="width:64px;height:64px;background:#1a2540;border-radius:14px;display:flex;align-items:center;justify-content:center;"><svg viewBox="35 52 105 32" style="width:42px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="white" stroke-width="3.5" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="3.5" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg></div><div class="fav-sz">64px</div></div>
+          <div class="fav-box"><div style="width:40px;height:40px;background:#1a2540;border-radius:9px;display:flex;align-items:center;justify-content:center;"><svg viewBox="35 52 105 32" style="width:28px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="white" stroke-width="4.5" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="4.5" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="white" stroke-width="3" stroke-linecap="round"/></svg></div><div class="fav-sz">40px</div></div>
+          <div class="fav-box"><div style="width:24px;height:24px;background:#1a2540;border-radius:5px;display:flex;align-items:center;justify-content:center;"><svg viewBox="35 52 105 32" style="width:18px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="white" stroke-width="6" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="6" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="white" stroke-width="4" stroke-linecap="round"/></svg></div><div class="fav-sz">24px</div></div>
+          <div class="fav-box"><div style="width:16px;height:16px;background:#1a2540;border-radius:3px;display:flex;align-items:center;justify-content:center;"><svg viewBox="35 52 105 32" style="width:12px;height:auto;"><path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="white" stroke-width="8" stroke-linecap="round" fill="none"/><path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="8" stroke-linecap="round" fill="none"/><line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="white" stroke-width="5" stroke-linecap="round"/></svg></div><div class="fav-sz">16px</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sig-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-sig">07 · Email Signature</div>
+    <h2 class="sec-h" data-i18n="h-sig">Every email,<br/>a brand moment.</h2>
+    <p class="sec-p" data-i18n="p1-sig-p">The signature carries the mark into daily communication, reinforcing recognition quietly with every message sent.</p>
+    <div class="sig-demo">
+      <div style="flex-shrink:0;">
+        <svg viewBox="35 50 105 35" style="width:80px;height:auto;">
+          <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#1a2540" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+          <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#1a2540" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sig-divider"></div>
+      <div>
+        <div class="sig-name">山田 太郎</div>
+        <div class="sig-title">代表取締役 · Chief Executive Officer</div>
+        <div class="sig-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ee978f838f8a8fae8782829b8387808f9a8bc38c9c878a898bc08d81c0849e">[email&#160;protected]</a><br/>+81-90-XXXX-XXXX · illuminate-bridge.co.jp</div>
+        <div class="sig-co">株式会社 I&amp;B · Illuminate Bridge Co., Ltd.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-copy" data-i18n="ft-copy">© 2025 株式会社 I&amp;B · Brand Identity · Confidential</div>
+  <svg viewBox="35 50 105 35" style="width:52px;height:auto;opacity:0.18;">
+    <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+    <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#FEFEFE" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  <div class="ft-pat" data-i18n="p1-ft-pat">Pattern 01 · Single Line Monogram</div>
+</footer>
+
+</div><!-- /panel-1 -->
+
+
+<!-- ══════════════════════════════════════════ -->
+<!--  PATTERN 2 — ILLUMINATE RAYS + BRIDGE     -->
+<!-- ══════════════════════════════════════════ -->
+<div class="pattern-panel" id="panel-2">
+
+<section class="cover">
+  <div class="cover-rule-t"></div>
+  <div class="cover-rule-b"></div>
+  <div class="cover-eyebrow" data-i18n="p2-eyebrow">Brand Identity Proposal · 株式会社 I&amp;B</div>
+  <div class="cover-mark">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.99 59.46" width="180" height="140">
+      <defs>
+        <linearGradient id="lg-cov2" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/>
+        </linearGradient>
+      </defs>
+      <circle fill="url(#lg-cov2)" cx="37.49" cy="31.05" r="5.26"/>
+      <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+      <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+      <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+      <line x1="45.91" y1="39.47" x2="60.12" y2="55.25" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+      <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+      <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+      <line x1="29.07" y1="39.47" x2="14.87" y2="55.25" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+      <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+      <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+      <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#FEFEFE" stroke-width="1.32" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <h1 class="cover-title" data-i18n="p2-cover-title">Pattern <span>02</span><br/>Illuminate Rays + Bridge</h1>
+  <p class="cover-sub" data-i18n="p2-cover-sub">Illuminate Bridge · Brand System</p>
+  <div class="cover-badge" data-i18n="p2-cover-badge">Design Pattern 02 / 03</div>
+</section>
+
+<section class="story-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-brand-story">01 · Brand Story</div>
+    <h2 class="sec-h" data-i18n="p2-story-h">Light radiates.<br/>The bridge holds.<br/>People find each other.</h2>
+    <div class="story-grid">
+      <div>
+        <p class="sec-p" data-i18n="p2-story-p1">The Illuminate Rays + Bridge mark begins with a single gold circle — a point of light. From it, rays extend outward in every direction, the way a single encounter can ripple into a life-changing connection. Below it, two arches rest on a shared baseline: the bridge between people.</p>
+        <br/>
+        <p class="sec-p" data-i18n="p2-story-p2">This is the most direct expression of the name Illuminate Bridge. The mark does not hide its meaning — it announces it. The light source is the company itself: always at the center, always radiating warmth, always connecting the two sides of every bridge it builds.</p>
+        <br/>
+        <p class="sec-p" data-i18n="p2-story-p3">The rays fade with distance — a deliberate choice. Warmth and influence are strongest at the source, softer at the edges. This gives the mark depth and humanity that a simpler symbol cannot achieve.</p>
+      </div>
+      <div>
+        <blockquote class="story-quote">"光を照らし、橋を架ける。<br/>Illuminate the path,<br/>build the bridge."</blockquote>
+        <div class="kw-list">
+          <div class="kw"><div class="kw-dot"></div>光 · A single source of light</div>
+          <div class="kw"><div class="kw-dot"></div>放射 · Warmth radiating outward</div>
+          <div class="kw"><div class="kw-dot"></div>橋 · The bridge — steady &amp; grounded</div>
+          <div class="kw"><div class="kw-dot"></div>挑戦 · Rays pointing in all directions</div>
+          <div class="kw"><div class="kw-dot"></div>誠実 · The solid baseline — trust</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="lockups-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-lockups">02 · Logo Lockups</div>
+    <h2 class="sec-h" data-i18n="h-lockups">Mark, wordmark,<br/>and full lockup.</h2>
+    <p class="sec-p" data-i18n="p2-lockups-p">Three configurations — from app icon to letterhead.</p>
+  </div>
+  <div class="lockups-grid" style="max-width:1100px;margin:0 auto;padding:0;">
+    <!-- Icon only light -->
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.99 59.46" style="width:100px;height:auto;">
+        <defs><linearGradient id="lg-l1p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+        <circle fill="url(#lg-l1p2)" cx="37.49" cy="31.05" r="5.26"/>
+        <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+        <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+        <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+        <line x1="45.91" y1="39.47" x2="60.12" y2="55.25" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+        <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+        <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+        <line x1="29.07" y1="39.47" x2="14.87" y2="55.25" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+        <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+        <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+        <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-icon-light">Icon Only · Light</div>
+    </div>
+    <!-- Icon + Wordmark light (exact from IconWordmark_pt2.svg) -->
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.6 81.14" style="width:160px;height:auto;">
+        <defs><linearGradient id="lg-l2p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+        <text transform="translate(20.78 67.22)" fill="#1a2540" font-family="Georgia,serif" font-size="45.89" letter-spacing=".06em"><tspan x="0" y="0">I&amp;B</tspan></text>
+        <circle fill="url(#lg-l2p2)" cx="29.39" cy="27.09" r="4.59"/>
+        <line x1="29.39" y1="17.91" x2="29.39" y2=".46" stroke="#c8963e" stroke-width=".92" stroke-linecap="round" opacity="0.9"/>
+        <line x1="36.73" y1="19.74" x2="49.13" y2="5.97" stroke="#c8963e" stroke-width=".92" stroke-linecap="round" opacity="0.7"/>
+        <line x1="38.57" y1="27.09" x2="58.31" y2="27.09" stroke="#c8963e" stroke-width=".92" stroke-linecap="round" opacity="0.5"/>
+        <line x1="22.04" y1="19.74" x2="9.64" y2="5.97" stroke="#c8963e" stroke-width=".92" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20.2" y1="27.09" x2=".46" y2="27.09" stroke="#c8963e" stroke-width=".92" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-wm-light">Icon + Wordmark · Light</div>
+    </div>
+    <!-- Icon + Full Name light (exact from IconFullName_pt2.svg) -->
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 179.24 51.35" style="width:220px;height:auto;">
+        <defs><linearGradient id="lg-l3p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+        <circle fill="url(#lg-l3p2)" cx="28.27" cy="23.41" r="3.97"/>
+        <line x1="28.27" y1="15.47" x2="28.27" y2=".4" stroke="#c8963e" stroke-width=".79" stroke-linecap="round" opacity="0.9"/>
+        <line x1="34.62" y1="17.06" x2="45.33" y2="5.16" stroke="#c8963e" stroke-width=".79" stroke-linecap="round" opacity="0.7"/>
+        <line x1="36.2" y1="23.41" x2="53.27" y2="23.41" stroke="#c8963e" stroke-width=".79" stroke-linecap="round" opacity="0.5"/>
+        <line x1="34.62" y1="29.76" x2="45.33" y2="41.66" stroke="#c8963e" stroke-width=".79" stroke-linecap="round" opacity="0.3"/>
+        <line x1="21.92" y1="17.06" x2="11.21" y2="5.16" stroke="#c8963e" stroke-width=".79" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20.33" y1="23.41" x2="3.27" y2="23.41" stroke="#c8963e" stroke-width=".79" stroke-linecap="round" opacity="0.5"/>
+        <line x1="21.92" y1="29.76" x2="11.21" y2="41.66" stroke="#c8963e" stroke-width=".79" stroke-linecap="round" opacity="0.3"/>
+        <path d="M5.65,44.04c0-8.46,3.7-12.7,11.11-12.7s11.51,4.23,11.51,12.7" stroke="#1a2540" stroke-width="1.59" stroke-linecap="round" fill="none"/>
+        <path d="M28.27,44.04c0-8.46,3.84-12.7,11.51-12.7s11.51,4.23,11.51,12.7" stroke="#1a2540" stroke-width="1.59" stroke-linecap="round" fill="none"/>
+        <line x1=".5" y1="44.04" x2="56.04" y2="44.04" stroke="#1a2540" stroke-width=".99" stroke-linecap="round"/>
+        <text transform="translate(65.35 19.63)" fill="#1a2540" font-family="Georgia,serif" font-size="22.09" letter-spacing=".06em"><tspan x="0" y="0">Illuminate</tspan></text>
+        <text transform="translate(66.21 44.66)" fill="#1a2540" font-family="Georgia,serif" font-size="22.09" letter-spacing=".06em"><tspan x="0" y="0">Bridge</tspan></text>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-fn-light">Icon + Full Name · Light</div>
+    </div>
+    <!-- Icon only dark -->
+    <div class="lk dark reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.99 59.46" style="width:100px;height:auto;">
+        <defs><linearGradient id="lg-l4p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+        <circle fill="url(#lg-l4p2)" cx="37.49" cy="31.05" r="5.26"/>
+        <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+        <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+        <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+        <line x1="45.91" y1="39.47" x2="60.12" y2="55.25" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+        <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+        <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+        <line x1="29.07" y1="39.47" x2="14.87" y2="55.25" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+        <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+        <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+        <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#FEFEFE" stroke-width="1.32" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-icon-dark">Icon Only · Dark</div>
+    </div>
+    <!-- Icon + Wordmark dark -->
+    <div class="lk dark reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 106.6 81.14" style="width:160px;height:auto;">
+        <defs><linearGradient id="lg-l5p2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+        <text transform="translate(20.78 67.22)" fill="#FEFEFE" font-family="Georgia,serif" font-size="45.89" letter-spacing=".06em"><tspan x="0" y="0">I&amp;B</tspan></text>
+        <circle fill="url(#lg-l5p2)" cx="29.39" cy="27.09" r="4.59"/>
+        <line x1="29.39" y1="17.91" x2="29.39" y2=".46" stroke="#e8c27a" stroke-width=".92" stroke-linecap="round" opacity="0.9"/>
+        <line x1="36.73" y1="19.74" x2="49.13" y2="5.97" stroke="#e8c27a" stroke-width=".92" stroke-linecap="round" opacity="0.7"/>
+        <line x1="38.57" y1="27.09" x2="58.31" y2="27.09" stroke="#e8c27a" stroke-width=".92" stroke-linecap="round" opacity="0.5"/>
+        <line x1="22.04" y1="19.74" x2="9.64" y2="5.97" stroke="#e8c27a" stroke-width=".92" stroke-linecap="round" opacity="0.7"/>
+        <line x1="20.2" y1="27.09" x2=".46" y2="27.09" stroke="#e8c27a" stroke-width=".92" stroke-linecap="round" opacity="0.5"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-wm-dark">Icon + Wordmark · Dark</div>
+    </div>
+    <!-- Monochrome -->
+    <div class="lk mid reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.99 59.46" style="width:100px;height:auto;">
+        <circle fill="#1a2540" cx="37.49" cy="31.05" r="5.26"/>
+        <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#1a2540" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+        <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#1a2540" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+        <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#1a2540" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+        <line x1="45.91" y1="39.47" x2="60.12" y2="55.25" stroke="#1a2540" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+        <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#1a2540" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+        <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#1a2540" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+        <line x1="29.07" y1="39.47" x2="14.87" y2="55.25" stroke="#1a2540" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+        <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+        <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+        <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-mono">Monochrome · Neutral</div>
+    </div>
+  </div>
+</section>
+
+<section class="palette-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-colors">03 · Color System</div>
+    <h2 class="sec-h" data-i18n="p2-colors-h">The same palette —<br/>gold takes center stage.</h2>
+    <p class="sec-p" data-i18n="p2-colors-p">In this pattern, gold is the hero — the source of light. Navy grounds the bridge. The hierarchy shifts but the brand language stays the same.</p>
+  </div>
+  <div class="swatches" style="max-width:1100px;margin:0 auto;padding:0 60px 96px;">
+    <div class="sw" style="background:#1a2540;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Deep Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#1A2540</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Bridge · Grounding</div></div>
+    <div class="sw" style="background:#2E3D68;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Mid Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#2E3D68</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Support · Depth</div></div>
+    <div class="sw" style="background:#c8963e;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#C8963E</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Light Source · Hero</div></div>
+    <div class="sw" style="background:#e8c27a;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold Light</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#E8C27A</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Ray Tips · Glow</div></div>
+    <div class="sw" style="background:#F5F3EE;"><div class="sw-name" style="color:#8A8680;">Cream</div><div class="sw-hex" style="color:#B0ADA8;">#F5F3EE</div><div class="sw-role" style="color:#C0BDB8;">BG · Paper</div></div>
+    <div class="sw" style="background:#FEFEFE;border:1px solid #EAE7E0;"><div class="sw-name" style="color:#8A8680;">White</div><div class="sw-hex" style="color:#B0ADA8;">#FEFEFE</div><div class="sw-role" style="color:#C0BDB8;">BG · Clean</div></div>
+  </div>
+</section>
+
+<section class="type-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-type">04 · Typography</div>
+    <h2 class="sec-h" data-i18n="p2-type-h">Georgia for the mark.<br/>Helvetica Neue for everything else.</h2>
+    <p class="sec-p" data-i18n="p2-type-p">Pattern 02 uses Georgia for the wordmark — its serifs echo the warmth of the gold rays. Helvetica Neue handles all supporting communication.</p>
+  </div>
+  <div class="type-grid" style="max-width:1100px;margin:0 auto;padding:0 0 96px;">
+    <div class="type-cell reveal">
+      <div class="type-badge">Wordmark · Logotype</div>
+      <div style="font-family:Georgia,serif;font-size:52px;font-weight:400;color:var(--navy);line-height:1;margin-bottom:14px;letter-spacing:3px;">I&amp;B</div>
+      <div style="font-family:Georgia,serif;font-size:20px;color:var(--navy);margin-bottom:14px;letter-spacing:2px;">Illuminate Bridge</div>
+      <div class="type-rule"></div>
+      <div class="type-name">Georgia</div>
+      <div class="type-detail">Regular 400 · Humanist Serif</div>
+      <div class="type-rule"></div>
+      <div class="type-sample" style="font-family:Georgia,serif;font-size:13px;">株式会社 I&amp;B · Illuminate Bridge<br/>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz · 0123456789</div>
+    </div>
+    <div class="type-cell reveal">
+      <div class="type-badge">Body · Labels · UI</div>
+      <div style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:48px;font-weight:200;color:var(--navy);line-height:1;margin-bottom:14px;letter-spacing:4px;">I&amp;B</div>
+      <div style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:12px;font-weight:300;color:var(--navy);letter-spacing:5px;margin-bottom:14px;text-transform:uppercase;">Illuminate Bridge</div>
+      <div class="type-rule"></div>
+      <div class="type-name">Helvetica Neue</div>
+      <div class="type-detail">Light 300 · Regular 400 · Medium 500</div>
+      <div class="type-rule"></div>
+      <div class="type-sample">株式会社 I&amp;B · illuminate bridge<br/>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz · 0123456789</div>
+    </div>
+  </div>
+</section>
+
+<section class="rules-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-rules">05 · Usage Rules</div>
+    <h2 class="sec-h" data-i18n="h-rules">How to use it,<br/>and how not to.</h2>
+    <p class="sec-p" data-i18n="p2-rules-p">The rays carry precise opacity values — never flatten them. The mark's sense of depth depends entirely on this hierarchy.</p>
+  </div>
+  <div class="rules-grid" style="max-width:1100px;margin:0 auto;padding:0 0 96px;">
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-do">✓</span> <span data-i18n="p2-rule1-title">Preserve Ray Opacity</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:40px;padding:28px 0;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <svg viewBox="0 0 74.99 59.46" style="width:80px;height:auto;">
+            <circle fill="#c8963e" cx="37.49" cy="31.05" r="5.26"/>
+            <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+            <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+            <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+            <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+            <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+            <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+          </svg>
+          <span style="font-size:7.5px;letter-spacing:2px;color:var(--gold);">✓ Correct</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.4;">
+          <svg viewBox="0 0 74.99 59.46" style="width:80px;height:auto;">
+            <circle fill="#c8963e" cx="37.49" cy="31.05" r="5.26"/>
+            <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round"/>
+            <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round"/>
+            <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round"/>
+            <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round"/>
+            <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round"/>
+            <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+          </svg>
+          <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">✗ Flat rays</span>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p2-rule1-body">Rays use graduated opacity: 0.9 → 0.7 → 0.5 → 0.3. This simulates natural light falloff and must never be overridden.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-do">✓</span> <span data-i18n="p2-rule2-title">Clear Space</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:28px 0;">
+        <div style="border:1px dashed #b8873a;padding:20px;position:relative;">
+          <svg viewBox="0 0 74.99 59.46" style="width:80px;height:auto;">
+            <circle fill="#c8963e" cx="37.49" cy="31.05" r="5.26"/>
+            <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+            <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+            <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+            <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+          </svg>
+          <div style="position:absolute;top:3px;left:50%;transform:translateX(-50%);font-size:6.5px;color:#b8873a;letter-spacing:1.5px;white-space:nowrap;">clear space = height × 0.5</div>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p2-rule2-body">Clear space must account for the outermost ray tips — not just the bridge base. The rays define the full extent of the mark.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-dont">✗</span> <span data-i18n="p2-rule3-title">Do Not Distort</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:28px 0;opacity:0.4;">
+        <svg viewBox="0 0 74.99 59.46" style="width:130px;height:40px;">
+          <circle fill="#c8963e" cx="37.49" cy="31.05" r="5.26"/>
+          <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+          <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="rule-body" data-i18n="p2-rule3-body">The ray angles are geometrically precise and symmetrical. Any stretch or rotation destroys the radial balance of the light source.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-dont">✗</span> <span data-i18n="p2-rule4-title">Approved Colors Only</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:28px 0;opacity:0.35;">
+        <svg viewBox="0 0 74.99 59.46" style="width:80px;height:auto;">
+          <circle fill="#9B59B6" cx="37.49" cy="31.05" r="5.26"/>
+          <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#9B59B6" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+          <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#9B59B6" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+          <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#E74C3C" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#E74C3C" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#E74C3C" stroke-width="1.32" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <p class="rule-body" data-i18n="p2-rule4-body">Gold rays + Navy bridge on light backgrounds. White/light-gold rays on dark backgrounds. No other color combinations.</p>
+    </div>
+  </div>
+</section>
+
+<section class="mock-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-apps">06 · Applications</div>
+    <h2 class="sec-h" data-i18n="h-apps">The mark in the<br/>real world.</h2>
+    <p class="sec-p" data-i18n="p2-apps-p">The gold circle makes this mark instantly recognisable at small sizes — a strong advantage for digital use.</p>
+  </div>
+  <div class="mock-grid" style="max-width:1100px;margin:0 auto;padding:0 60px 96px;">
+    <div>
+      <div class="mock-label" data-i18n="mock-card-front">Business Card — Front</div>
+      <div class="card"><div class="card-front">
+        <svg viewBox="0 0 74.99 59.46" style="width:80px;height:auto;">
+          <defs><linearGradient id="lg-cf2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+          <circle fill="url(#lg-cf2)" cx="37.49" cy="31.05" r="5.26"/>
+          <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+          <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+          <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+          <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+          <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+          <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#FEFEFE" stroke-width="1.32" stroke-linecap="round"/>
+        </svg>
+        <div class="card-sub-text">illuminate bridge</div>
+      </div></div>
+      <div class="mock-label" style="margin-top:20px;" data-i18n="mock-card-back">Business Card — Back</div>
+      <div class="card"><div class="card-back">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <svg viewBox="0 0 74.99 59.46" style="width:28px;height:auto;">
+              <circle fill="#c8963e" cx="37.49" cy="31.05" r="6"/>
+              <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+              <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#c8963e" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#c8963e" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+              <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="3" stroke-linecap="round" fill="none"/>
+              <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span style="font-family:Georgia,serif;font-size:15px;letter-spacing:2px;color:#1a2540;">I&amp;B</span>
+          </div>
+          <div class="card-person-name">山田 太郎</div>
+          <div class="card-role">代表取締役 · CEO</div>
+        </div>
+        <div>
+          <div class="card-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c7aea9a1a887aeababb2aaaea9a6b3a2eaa5b5aea3a0a2e9a4a8e9adb7">[email&#160;protected]</a><br/>illuminate-bridge.co.jp</div>
+          <div class="card-co" style="margin-top:8px;">株式会社 I&amp;B · Illuminate Bridge Co., Ltd.</div>
+        </div>
+      </div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div>
+        <div class="mock-label" data-i18n="mock-stamp">Stamp &amp; Emboss</div>
+        <div class="stamp-row">
+          <div class="stamp-circle">
+            <svg viewBox="0 0 74.99 59.46" style="width:48px;height:auto;">
+              <circle fill="#c8963e" cx="37.49" cy="31.05" r="5.26"/>
+              <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+              <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#c8963e" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+              <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#c8963e" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+              <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+              <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+              <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+            </svg>
+            <div class="stamp-inner-text">株式会社</div>
+          </div>
+          <div style="background:var(--cream);padding:28px 24px;border-radius:4px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <svg viewBox="0 0 74.99 59.46" style="width:68px;height:auto;filter:drop-shadow(1px 1px 0 rgba(255,255,255,0.85)) drop-shadow(-1px -1px 0 rgba(0,0,0,0.1));">
+              <circle fill="#C4B99A" cx="37.49" cy="31.05" r="5.26"/>
+              <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#C4B99A" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+              <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#C4B99A" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+              <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#C4B99A" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+              <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#C4B99A" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+              <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#C4B99A" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+              <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#C4B99A" stroke-width="1.32" stroke-linecap="round"/>
+            </svg>
+            <div style="font-size:7px;letter-spacing:3px;color:#B0A890;text-transform:uppercase;">Emboss</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mock-label" data-i18n="mock-fav">Favicon / App Icon</div>
+        <div class="fav-row">
+          <div class="fav-box">
+            <div style="width:64px;height:64px;background:#1a2540;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="0 0 74.99 59.46" style="width:44px;height:auto;">
+                <defs><linearGradient id="lg-fv64" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+                <circle fill="url(#lg-fv64)" cx="37.49" cy="31.05" r="5.26"/>
+                <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#e8c27a" stroke-width="1.5" stroke-linecap="round" opacity="0.9"/>
+                <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#e8c27a" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#e8c27a" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+                <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="fav-sz">64px</div>
+          </div>
+          <div class="fav-box">
+            <div style="width:40px;height:40px;background:#1a2540;border-radius:9px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="5 5 65 55" style="width:28px;height:auto;">
+                <circle fill="#c8963e" cx="37.49" cy="31.05" r="6.5"/>
+                <line x1="37.49" y1="20.52" x2="37.49" y2="5" stroke="#e8c27a" stroke-width="2" stroke-linecap="round" opacity="0.9"/>
+                <line x1="45.91" y1="22.63" x2="57" y2="10" stroke="#e8c27a" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <line x1="29.07" y1="22.63" x2="18" y2="10" stroke="#e8c27a" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+                <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="white" stroke-width="3" stroke-linecap="round" fill="none"/>
+                <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="white" stroke-width="2.2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="fav-sz">40px</div>
+          </div>
+          <div class="fav-box">
+            <div style="width:24px;height:24px;background:#1a2540;border-radius:5px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="10 10 55 50" style="width:18px;height:auto;">
+                <circle fill="#c8963e" cx="37.49" cy="31.05" r="8"/>
+                <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="white" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="fav-sz">24px</div>
+          </div>
+          <div class="fav-box">
+            <div style="width:16px;height:16px;background:#c8963e;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="28 22 20 18" style="width:10px;height:auto;">
+                <circle fill="white" cx="37.49" cy="31.05" r="7"/>
+              </svg>
+            </div>
+            <div class="fav-sz">16px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sig-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-sig">07 · Email Signature</div>
+    <h2 class="sec-h" data-i18n="h-sig">Every email,<br/>a brand moment.</h2>
+    <p class="sec-p" data-i18n="p2-sig-p">The gold dot and rays are recognisable even at small sizes — a warm, human presence in every inbox.</p>
+    <div class="sig-demo">
+      <div style="flex-shrink:0;">
+        <svg viewBox="0 0 74.99 59.46" style="width:52px;height:auto;">
+          <defs><linearGradient id="lg-sig2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+          <circle fill="url(#lg-sig2)" cx="37.49" cy="31.05" r="5.26"/>
+          <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+          <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+          <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+          <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+          <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#c8963e" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+          <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#1a2540" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+          <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#1a2540" stroke-width="1.32" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="sig-divider"></div>
+      <div>
+        <div class="sig-name">山田 太郎</div>
+        <div class="sig-title">代表取締役 · Chief Executive Officer</div>
+        <div class="sig-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94edf5f9f5f0f5d4fdf8f8e1f9fdfaf5e0f1b9f6e6fdf0f3f1baf7fbbafee4">[email&#160;protected]</a><br/>+81-90-XXXX-XXXX · illuminate-bridge.co.jp</div>
+        <div class="sig-co">株式会社 I&amp;B · Illuminate Bridge Co., Ltd.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-copy" data-i18n="ft-copy">© 2025 株式会社 I&amp;B · Brand Identity · Confidential</div>
+  <svg viewBox="0 0 74.99 59.46" style="width:36px;height:auto;opacity:0.2;">
+    <circle fill="#e8c27a" cx="37.49" cy="31.05" r="5.26"/>
+    <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+    <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+    <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+    <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+    <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+    <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#FEFEFE" stroke-width="1.32" stroke-linecap="round"/>
+  </svg>
+  <div class="ft-pat" data-i18n="p2-ft-pat">Pattern 02 · Illuminate Rays + Bridge</div>
+</footer>
+
+</div><!-- /panel-2 -->
+
+
+<!-- ══════════════════════════════════════════ -->
+<!--  PATTERN 3 — 人 (HITO) ARCH               -->
+<!-- ══════════════════════════════════════════ -->
+<div class="pattern-panel" id="panel-3">
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-rule-t"></div>
+  <div class="cover-rule-b"></div>
+  <div class="cover-eyebrow" data-i18n="p3-eyebrow">Brand Identity Proposal · 株式会社 I&amp;B</div>
+  <div class="cover-mark">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.27 50.28" width="180" height="146">
+      <defs>
+        <linearGradient id="lg-cov3-r" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stop-color="#c8963e"/>
+          <stop offset="1" stop-color="#e8c27a"/>
+        </linearGradient>
+        <linearGradient id="lg-cov3-dot" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#c8963e"/>
+          <stop offset="1" stop-color="#e8c27a"/>
+        </linearGradient>
+      </defs>
+      <!-- left leg navy -->
+      <path d="M30.68,3.69L9,48.44" stroke="#FEFEFE" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+      <!-- right leg gold gradient -->
+      <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-cov3-r)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+      <!-- baseline -->
+      <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#FEFEFE" stroke-width="1.38" stroke-linecap="round"/>
+      <!-- gold dot apex -->
+      <circle fill="url(#lg-cov3-dot)" cx="30.68" cy="3.23" r="3.23"/>
+    </svg>
+  </div>
+  <h1 class="cover-title" data-i18n="p3-cover-title">Pattern <span>03</span><br/>人 · Hito Arch</h1>
+  <p class="cover-sub" data-i18n="p3-cover-sub">Illuminate Bridge · Brand System</p>
+  <div class="cover-badge" data-i18n="p3-cover-badge">Design Pattern 03 / 03</div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="story-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-brand-story">01 · Brand Story</div>
+    <h2 class="sec-h" data-i18n="p3-story-h">A single stroke.<br/>A person. A bridge.<br/>Everything at once.</h2>
+    <div class="story-grid">
+      <div>
+        <p class="sec-p" data-i18n="p3-story-p1">The 人 (Hito) Arch is the most poetic of the three marks. A single kanji — 人, meaning "person" — is abstracted into a pure geometric form: two diverging lines rising from a shared gold point, set upon a grounding baseline.</p>
+        <br/>
+        <p class="sec-p" data-i18n="p3-story-p2">The left leg descends in deep navy. The right leg flows downward in warm gold. The apex — that single circle of light — is the human being at the center of every connection I&amp;B creates. Two paths. One origin. One ground to stand on.</p>
+        <br/>
+        <p class="sec-p" data-i18n="p3-story-p3">This mark speaks in the language of Japanese visual culture without being literal. Any viewer — Japanese or international — will sense its human quality immediately. It is the most universal and enduring of the three patterns.</p>
+      </div>
+      <div>
+        <blockquote class="story-quote">"人を中心に。<br/>The person<br/>at the center of everything."</blockquote>
+        <div class="kw-list">
+          <div class="kw"><div class="kw-dot"></div>人 · The kanji itself — person, humanity</div>
+          <div class="kw"><div class="kw-dot"></div>光 · The gold apex — a point of light</div>
+          <div class="kw"><div class="kw-dot"></div>二道 · Two paths diverging from one origin</div>
+          <div class="kw"><div class="kw-dot"></div>地 · The baseline — shared ground, stability</div>
+          <div class="kw"><div class="kw-dot"></div>誠実 · The simplest mark is the most honest</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCKUPS -->
+<section class="lockups-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-lockups">02 · Logo Lockups</div>
+    <h2 class="sec-h" data-i18n="h-lockups">Mark, wordmark,<br/>and full lockup.</h2>
+    <p class="sec-p" data-i18n="p3-lockups-p">Three configurations. The mark is strong enough to stand completely alone.</p>
+  </div>
+  <div class="lockups-grid" style="max-width:1100px;margin:0 auto;padding:0;">
+
+    <!-- Icon only · light -->
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.27 50.28" style="width:90px;height:auto;">
+        <defs>
+          <linearGradient id="lg-lk1p3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
+          <linearGradient id="lg-dot1p3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
+        </defs>
+        <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-lk1p3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+        <circle fill="url(#lg-dot1p3)" cx="30.68" cy="3.23" r="3.23"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-icon-light">Icon Only · Light</div>
+    </div>
+
+    <!-- Wordmark Only · Light -->
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.25 52.27" style="width:160px;height:auto;">
+        <path fill="#1a2540" d="M0,0h3.17v51.41H0V0Z"/>
+        <path fill="#1a2540" d="M47.73,0h20.59c3.07,0,5.64.38,7.7,1.15,2.06.77,3.72,1.78,4.97,3.02,1.25,1.25,2.15,2.68,2.7,4.28.55,1.61.83,3.23.83,4.86,0,1.39-.24,2.71-.72,3.96-.48,1.25-1.17,2.35-2.05,3.31-.89.96-1.94,1.76-3.17,2.41-1.22.65-2.58,1.07-4.07,1.26l.14.14c.33-.05,1.13.1,2.38.43,1.25.34,2.56.97,3.92,1.91,1.37.94,2.59,2.23,3.67,3.89,1.08,1.66,1.62,3.78,1.62,6.37,0,2.35-.43,4.42-1.3,6.19-.86,1.78-2.08,3.28-3.63,4.5-1.56,1.22-3.45,2.15-5.65,2.77-2.21.62-4.66.94-7.34.94h-20.59V0ZM68.33,23.33c4.37,0,7.63-.97,9.79-2.92s3.24-4.5,3.24-7.67c0-1.87-.36-3.44-1.08-4.72-.72-1.27-1.68-2.3-2.88-3.1-1.2-.79-2.58-1.36-4.14-1.69-1.56-.33-3.2-.5-4.93-.5h-17.42v20.59h17.42ZM68.33,48.67c4.61,0,8.22-.97,10.84-2.92,2.62-1.94,3.92-4.86,3.92-8.75,0-2.21-.46-4.02-1.37-5.44-.91-1.42-2.08-2.53-3.49-3.35-1.42-.82-3-1.38-4.75-1.69-1.75-.31-3.47-.47-5.15-.47h-17.42v22.61h17.42Z"/>
+        <path fill="#e8c27a" d="M38.66,41.11c.72-1.68,1.31-3.44,1.76-5.29.13-.52.24-1.04.34-1.56,1.63-.42,2.84-1.89,2.84-3.65,0-2.09-1.69-3.78-3.78-3.78s-3.78,1.69-3.78,3.78c0,1.49.87,2.77,2.12,3.38-.04.21-.08.43-.12.64-.31,1.44-.73,2.83-1.26,4.18l-12.24-15.05c1.25-.91,2.51-1.81,3.78-2.7,1.27-.89,2.41-1.87,3.42-2.95s1.84-2.29,2.48-3.64c.65-1.34.97-2.93.97-4.75,0-1.44-.3-2.71-.9-3.82-.6-1.1-1.4-2.03-2.41-2.77-1.01-.74-2.16-1.31-3.46-1.69-1.3-.38-2.64-.58-4.03-.58s-2.66.22-3.96.65c-1.3.43-2.45,1.03-3.46,1.8-1.01.77-1.82,1.69-2.45,2.77s-.94,2.29-.94,3.64.22,2.68.65,3.85c.43,1.18.98,2.3,1.66,3.38.67,1.08,1.42,2.11,2.23,3.1.82.98,1.63,1.98,2.45,2.99-1.49.96-3.02,1.94-4.61,2.95s-3.02,2.14-4.32,3.38c-1.3,1.25-2.36,2.66-3.2,4.25s-1.26,3.43-1.26,5.54.4,4.07,1.19,5.72c.79,1.66,1.87,3.02,3.24,4.1s2.98,1.9,4.82,2.45c1.85.55,3.85.83,6.01.83,3.17,0,6-.76,8.5-2.27,2.5-1.51,4.54-3.59,6.12-6.23l6.26,7.63h3.67l-8.35-10.3ZM18.79,16.31c-.67-.98-1.25-2.02-1.73-3.1-.48-1.08-.72-2.24-.72-3.49,0-.96.24-1.84.72-2.63.48-.79,1.09-1.48,1.84-2.05.74-.58,1.59-1.02,2.56-1.33.96-.31,1.94-.47,2.95-.47s1.99.16,2.95.47c.96.31,1.81.76,2.56,1.33s1.36,1.26,1.84,2.05c.48.79.72,1.67.72,2.63,0,1.44-.3,2.76-.9,3.96-.6,1.2-1.37,2.28-2.3,3.24-.94.96-1.96,1.84-3.06,2.63-1.1.79-2.18,1.52-3.24,2.2-.58-.86-1.25-1.74-2.02-2.63-.77-.89-1.49-1.82-2.16-2.81ZM34.49,43.02c-.53.89-1.32,1.84-2.38,2.84-1.06,1.01-2.39,1.93-4,2.77-1.61.84-3.49,1.26-5.65,1.26-1.58,0-3.12-.24-4.61-.72-1.49-.48-2.82-1.17-4-2.09-1.18-.91-2.12-2.04-2.84-3.38-.72-1.34-1.08-2.86-1.08-4.54,0-1.82.38-3.42,1.15-4.79s1.74-2.6,2.92-3.71c1.18-1.1,2.47-2.1,3.89-2.99,1.42-.89,2.79-1.76,4.14-2.63l13.25,16.49c0,.1-.26.59-.79,1.48Z"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-wm-only-light">Wordmark Only · Light</div>
+    </div>
+
+    <!-- Icon + Full Name · light (exact from IconFullName_pt3.svg) -->
+    <div class="lk reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226.7 34.47" style="width:280px;height:auto;">
+        <defs>
+          <linearGradient id="lg-lk3p3-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
+          <linearGradient id="lg-lk3p3-dot" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
+        </defs>
+        <path d="M21.03,2.53l-14.86,30.68" stroke="#1a2540" stroke-width="2.53" stroke-linecap="round" fill="none"/>
+        <path d="M21.03,2.53l15.81,30.68" stroke="url(#lg-lk3p3-r)" stroke-width="2.53" stroke-linecap="round" fill="none"/>
+        <line x1=".47" y1="33.21" x2="42.22" y2="33.21" stroke="#1a2540" stroke-width=".95" stroke-linecap="round"/>
+        <circle fill="url(#lg-lk3p3-dot)" cx="21.03" cy="2.21" r="2.21"/>
+        <!-- ILLUMINATE BRIDGE text — exact letter-spacing from original -->
+        <text transform="translate(45.11 21.43)" fill="#1a2540" font-family="'Helvetica Neue',Helvetica,sans-serif" font-size="9.96">
+          <tspan letter-spacing=".53em">ILLUMIN</tspan><tspan letter-spacing=".44em">A</tspan><tspan letter-spacing=".53em">TE </tspan><tspan font-weight="500" letter-spacing=".53em">BRIDGE</tspan>
+        </text>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-fn-light">Icon + Full Name · Light</div>
+    </div>
+
+    <!-- Icon only · dark -->
+    <div class="lk dark reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.27 50.28" style="width:90px;height:auto;">
+        <defs>
+          <linearGradient id="lg-lk4p3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
+          <linearGradient id="lg-dot4p3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
+        </defs>
+        <path d="M30.68,3.69L9,48.44" stroke="#FEFEFE" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-lk4p3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#FEFEFE" stroke-width="1.38" stroke-linecap="round"/>
+        <circle fill="url(#lg-dot4p3)" cx="30.68" cy="3.23" r="3.23"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-icon-dark">Icon Only · Dark</div>
+    </div>
+
+    <!-- Wordmark only · dark -->
+    <div class="lk dark reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.25 52.27" style="width:160px;height:auto;">
+        <path fill="#FEFEFE" d="M0,0h3.17v51.41H0V0Z"/>
+        <path fill="#FEFEFE" d="M47.73,0h20.59c3.07,0,5.64.38,7.7,1.15,2.06.77,3.72,1.78,4.97,3.02,1.25,1.25,2.15,2.68,2.7,4.28.55,1.61.83,3.23.83,4.86,0,1.39-.24,2.71-.72,3.96-.48,1.25-1.17,2.35-2.05,3.31-.89.96-1.94,1.76-3.17,2.41-1.22.65-2.58,1.07-4.07,1.26l.14.14c.33-.05,1.13.1,2.38.43,1.25.34,2.56.97,3.92,1.91,1.37.94,2.59,2.23,3.67,3.89,1.08,1.66,1.62,3.78,1.62,6.37,0,2.35-.43,4.42-1.3,6.19-.86,1.78-2.08,3.28-3.63,4.5-1.56,1.22-3.45,2.15-5.65,2.77-2.21.62-4.66.94-7.34.94h-20.59V0ZM68.33,23.33c4.37,0,7.63-.97,9.79-2.92s3.24-4.5,3.24-7.67c0-1.87-.36-3.44-1.08-4.72-.72-1.27-1.68-2.3-2.88-3.1-1.2-.79-2.58-1.36-4.14-1.69-1.56-.33-3.2-.5-4.93-.5h-17.42v20.59h17.42ZM68.33,48.67c4.61,0,8.22-.97,10.84-2.92,2.62-1.94,3.92-4.86,3.92-8.75,0-2.21-.46-4.02-1.37-5.44-.91-1.42-2.08-2.53-3.49-3.35-1.42-.82-3-1.38-4.75-1.69-1.75-.31-3.47-.47-5.15-.47h-17.42v22.61h17.42Z"/>
+        <path fill="#e8c27a" d="M38.66,41.11c.72-1.68,1.31-3.44,1.76-5.29.13-.52.24-1.04.34-1.56,1.63-.42,2.84-1.89,2.84-3.65,0-2.09-1.69-3.78-3.78-3.78s-3.78,1.69-3.78,3.78c0,1.49.87,2.77,2.12,3.38-.04.21-.08.43-.12.64-.31,1.44-.73,2.83-1.26,4.18l-12.24-15.05c1.25-.91,2.51-1.81,3.78-2.7,1.27-.89,2.41-1.87,3.42-2.95s1.84-2.29,2.48-3.64c.65-1.34.97-2.93.97-4.75,0-1.44-.3-2.71-.9-3.82-.6-1.1-1.4-2.03-2.41-2.77-1.01-.74-2.16-1.31-3.46-1.69-1.3-.38-2.64-.58-4.03-.58s-2.66.22-3.96.65c-1.3.43-2.45,1.03-3.46,1.8-1.01.77-1.82,1.69-2.45,2.77s-.94,2.29-.94,3.64.22,2.68.65,3.85c.43,1.18.98,2.3,1.66,3.38.67,1.08,1.42,2.11,2.23,3.1.82.98,1.63,1.98,2.45,2.99-1.49.96-3.02,1.94-4.61,2.95s-3.02,2.14-4.32,3.38c-1.3,1.25-2.36,2.66-3.2,4.25s-1.26,3.43-1.26,5.54.4,4.07,1.19,5.72c.79,1.66,1.87,3.02,3.24,4.1s2.98,1.9,4.82,2.45c1.85.55,3.85.83,6.01.83,3.17,0,6-.76,8.5-2.27,2.5-1.51,4.54-3.59,6.12-6.23l6.26,7.63h3.67l-8.35-10.3ZM18.79,16.31c-.67-.98-1.25-2.02-1.73-3.1-.48-1.08-.72-2.24-.72-3.49,0-.96.24-1.84.72-2.63.48-.79,1.09-1.48,1.84-2.05.74-.58,1.59-1.02,2.56-1.33.96-.31,1.94-.47,2.95-.47s1.99.16,2.95.47c.96.31,1.81.76,2.56,1.33s1.36,1.26,1.84,2.05c.48.79.72,1.67.72,2.63,0,1.44-.3,2.76-.9,3.96-.6,1.2-1.37,2.28-2.3,3.24-.94.96-1.96,1.84-3.06,2.63-1.1.79-2.18,1.52-3.24,2.2-.58-.86-1.25-1.74-2.02-2.63-.77-.89-1.49-1.82-2.16-2.81ZM34.49,43.02c-.53.89-1.32,1.84-2.38,2.84-1.06,1.01-2.39,1.93-4,2.77-1.61.84-3.49,1.26-5.65,1.26-1.58,0-3.12-.24-4.61-.72-1.49-.48-2.82-1.17-4-2.09-1.18-.91-2.12-2.04-2.84-3.38-.72-1.34-1.08-2.86-1.08-4.54,0-1.82.38-3.42,1.15-4.79s1.74-2.6,2.92-3.71c1.18-1.1,2.47-2.1,3.89-2.99,1.42-.89,2.79-1.76,4.14-2.63l13.25,16.49c0,.1-.26.59-.79,1.48Z"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-wm-only-dark">Wordmark Only · Dark</div>
+    </div>
+
+    <!-- Monochrome -->
+    <div class="lk mid reveal">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.27 50.28" style="width:90px;height:auto;">
+        <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <path d="M30.68,3.69l23.06,44.75" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+        <circle fill="#1a2540" cx="30.68" cy="3.23" r="3.23"/>
+      </svg>
+      <div class="lk-cap" data-i18n="lk-mono">Monochrome · Neutral</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PALETTE -->
+<section class="palette-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-colors">03 · Color System</div>
+    <h2 class="sec-h" data-i18n="p3-colors-h">Navy and gold —<br/>humanity in two colors.</h2>
+    <p class="sec-p" data-i18n="p3-colors-p">The two-tone mark makes the palette its own story. Navy is the quiet, grounding side of every human connection. Gold is the warmth that draws people forward.</p>
+  </div>
+  <div class="swatches" style="max-width:1100px;margin:0 auto;padding:0 60px 96px;">
+    <div class="sw" style="background:#1a2540;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Deep Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#1A2540</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Left Leg · Grounding</div></div>
+    <div class="sw" style="background:#2E3D68;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Mid Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#2E3D68</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Support · Depth</div></div>
+    <div class="sw" style="background:#c8963e;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#C8963E</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Right Leg · Warmth</div></div>
+    <div class="sw" style="background:#e8c27a;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold Light</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#E8C27A</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Apex Glow · Light</div></div>
+    <div class="sw" style="background:#F5F3EE;"><div class="sw-name" style="color:#8A8680;">Cream</div><div class="sw-hex" style="color:#B0ADA8;">#F5F3EE</div><div class="sw-role" style="color:#C0BDB8;">BG · Paper</div></div>
+    <div class="sw" style="background:#FEFEFE;border:1px solid #EAE7E0;"><div class="sw-name" style="color:#8A8680;">White</div><div class="sw-hex" style="color:#B0ADA8;">#FEFEFE</div><div class="sw-role" style="color:#C0BDB8;">BG · Clean</div></div>
+  </div>
+</section>
+
+<!-- TYPOGRAPHY -->
+<section class="type-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-type">04 · Typography</div>
+    <h2 class="sec-h" data-i18n="p3-type-h">Helvetica Neue.<br/>All-caps. Wide-tracked.</h2>
+    <p class="sec-p" data-i18n="p3-type-p">The full-name lockup uses Helvetica Neue in all-caps with generous letter-spacing — a confident, architectural companion to the minimal mark above it.</p>
+  </div>
+  <div class="type-grid" style="max-width:1100px;margin:0 auto;padding:0 0 96px;">
+    <div class="type-cell reveal">
+      <div class="type-badge">Full Name Lockup · Primary Text</div>
+      <div style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:13px;letter-spacing:.53em;color:var(--navy);text-transform:uppercase;line-height:1;margin-bottom:10px;">ILLUMINATE</div>
+      <div style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:13px;font-weight:500;letter-spacing:.53em;color:var(--navy);text-transform:uppercase;margin-bottom:20px;">BRIDGE</div>
+      <div style="font-family:Georgia,serif;font-size:52px;font-weight:400;color:var(--navy);line-height:1;margin-bottom:14px;letter-spacing:3px;">I&amp;B</div>
+      <div class="type-rule"></div>
+      <div class="type-name">Helvetica Neue · Georgia</div>
+      <div class="type-detail">Regular + Medium 500 · All caps · Wide tracking</div>
+      <div class="type-rule"></div>
+      <div class="type-sample" style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:11px;letter-spacing:.3em;text-transform:uppercase;">株式会社 I&amp;B<br/>ILLUMINATE · BRIDGE<br/>A B C D E F G H I J K L M</div>
+    </div>
+    <div class="type-cell reveal">
+      <div class="type-badge">Headlines · Quotes · Presentation</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:50px;font-weight:300;color:var(--navy);line-height:1;margin-bottom:14px;">人<br/><em style="font-size:32px;letter-spacing:2px;">Hito</em></div>
+      <div class="type-rule"></div>
+      <div class="type-name">Cormorant Garamond</div>
+      <div class="type-detail">Light 300 · Regular 400 · Italic</div>
+      <div class="type-rule"></div>
+      <div class="type-sample" style="font-family:'Cormorant Garamond',serif;font-size:15px;">人を中心に。<br/>ABCDEFGHIJKLMNOPQRSTUVWXYZ<br/>abcdefghijklmnopqrstuvwxyz</div>
+    </div>
+  </div>
+</section>
+
+<!-- USAGE RULES -->
+<section class="rules-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-rules">05 · Usage Rules</div>
+    <h2 class="sec-h" data-i18n="h-rules">How to use it,<br/>and how not to.</h2>
+    <p class="sec-p" data-i18n="p3-rules-p">The asymmetry of the mark is intentional — the right leg is longer than the left. Never mirror or make it symmetrical.</p>
+  </div>
+  <div class="rules-grid" style="max-width:1100px;margin:0 auto;padding:0 0 96px;">
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-do">✓</span> <span data-i18n="p3-rule1-title">Preserve Asymmetry</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:44px;padding:28px 0;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <svg viewBox="0 0 62.27 50.28" style="width:72px;height:auto;">
+            <defs><linearGradient id="lg-r1p3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+            <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-r1p3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+            <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
+          </svg>
+          <span style="font-size:7.5px;letter-spacing:2px;color:var(--gold);">✓ Correct</span>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.4;">
+          <!-- Mirrored / wrong: both legs same angle -->
+          <svg viewBox="0 0 62.27 50.28" style="width:72px;height:auto;">
+            <path d="M31,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M31,3.69l22,44.75" stroke="#c8963e" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+            <circle fill="#c8963e" cx="31" cy="3.23" r="3.23"/>
+          </svg>
+          <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">✗ Symmetric</span>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p3-rule1-body">The right leg is intentionally longer, mirroring the 人 kanji stroke. Never make the legs equal length or mirror the mark.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-do">✓</span> <span data-i18n="p3-rule2-title">Clear Space</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:28px 0;">
+        <div style="border:1px dashed #b8873a;padding:24px 28px;position:relative;">
+          <svg viewBox="0 0 62.27 50.28" style="width:80px;height:auto;">
+            <defs><linearGradient id="lg-r2p3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+            <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-r2p3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+            <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
+          </svg>
+          <div style="position:absolute;top:3px;left:50%;transform:translateX(-50%);font-size:6.5px;color:#b8873a;letter-spacing:1.5px;white-space:nowrap;">clear space = height × 0.5</div>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p3-rule2-body">The legs extend to the edges of the bounding box. Clear space is measured from the outermost points — the leg ends and the apex dot.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-dont">✗</span> <span data-i18n="p3-rule3-title">Do Not Distort</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;gap:36px;padding:28px 0;opacity:0.4;">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+          <svg viewBox="0 0 62.27 50.28" style="width:100px;height:36px;">
+            <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M30.68,3.69l23.06,44.75" stroke="#c8963e" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+          </svg>
+          <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">Stretched</span>
+        </div>
+      </div>
+      <p class="rule-body" data-i18n="p3-rule3-body">Never stretch or squish the mark. The proportions of the 人 form are fixed. Always scale uniformly.</p>
+    </div>
+    <div class="rule-cell reveal">
+      <div class="rule-title"><span class="badge-dont">✗</span> <span data-i18n="p3-rule4-title">Approved Colors Only</span></div>
+      <div style="display:flex;align-items:center;justify-content:center;padding:28px 0;opacity:0.35;">
+        <svg viewBox="0 0 62.27 50.28" style="width:80px;height:auto;">
+          <path d="M30.68,3.69L9,48.44" stroke="#E74C3C" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+          <path d="M30.68,3.69l23.06,44.75" stroke="#9B59B6" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+          <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#E74C3C" stroke-width="1.38" stroke-linecap="round"/>
+          <circle fill="#9B59B6" cx="30.68" cy="3.23" r="3.23"/>
+        </svg>
+      </div>
+      <p class="rule-body" data-i18n="p3-rule4-body">Left leg: Navy only. Right leg: Gold gradient only. On dark backgrounds, left leg turns white. Apex dot is always gold.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MOCKUPS -->
+<section class="mock-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-apps">06 · Applications</div>
+    <h2 class="sec-h" data-i18n="h-apps">The mark in the<br/>real world.</h2>
+    <p class="sec-p" data-i18n="p3-apps-p">The 人 form is immediately legible at any size — its boldness at small scales makes it an exceptional app icon and stamp mark.</p>
+  </div>
+  <div class="mock-grid" style="max-width:1100px;margin:0 auto;padding:0 60px 96px;">
+    <div>
+      <div class="mock-label" data-i18n="mock-card-front">Business Card — Front</div>
+      <div class="card"><div class="card-front">
+        <svg viewBox="0 0 62.27 50.28" style="width:80px;height:auto;">
+          <defs><linearGradient id="lg-cf3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient><linearGradient id="lg-cf3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+          <path d="M30.68,3.69L9,48.44" stroke="#FEFEFE" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+          <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-cf3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+          <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#FEFEFE" stroke-width="1.38" stroke-linecap="round"/>
+          <circle fill="url(#lg-cf3d)" cx="30.68" cy="3.23" r="3.23"/>
+        </svg>
+        <div class="card-sub-text" style="letter-spacing:5px;">ILLUMINATE BRIDGE</div>
+      </div></div>
+      <div class="mock-label" style="margin-top:20px;" data-i18n="mock-card-back">Business Card — Back</div>
+      <div class="card"><div class="card-back">
+        <div>
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+            <svg viewBox="0 0 62.27 50.28" style="width:32px;height:auto;">
+              <defs><linearGradient id="lg-cb3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+              <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-cb3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+              <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
+            </svg>
+            <span style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:9px;letter-spacing:5px;color:#1a2540;text-transform:uppercase;">I &amp; B</span>
+          </div>
+          <div class="card-person-name">山田 太郎</div>
+          <div class="card-role">代表取締役 · CEO</div>
+        </div>
+        <div>
+          <div class="card-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="2c45424a436c454040594145424d5849014e5e45484b49024f4302465c">[email&#160;protected]</a><br/>illuminate-bridge.co.jp</div>
+          <div class="card-co" style="margin-top:8px;">株式会社 I&amp;B · Illuminate Bridge Co., Ltd.</div>
+        </div>
+      </div></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:20px;">
+      <div>
+        <div class="mock-label" data-i18n="mock-stamp">Stamp &amp; Emboss</div>
+        <div class="stamp-row">
+          <div class="stamp-circle">
+            <svg viewBox="0 0 62.27 50.28" style="width:52px;height:auto;">
+              <defs><linearGradient id="lg-st3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+              <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-st3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+              <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
+            </svg>
+            <div class="stamp-inner-text">株式会社</div>
+          </div>
+          <div style="background:var(--cream);padding:28px 24px;border-radius:4px;display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <svg viewBox="0 0 62.27 50.28" style="width:68px;height:auto;filter:drop-shadow(1px 1px 0 rgba(255,255,255,0.85)) drop-shadow(-1px -1px 0 rgba(0,0,0,0.1));">
+              <path d="M30.68,3.69L9,48.44" stroke="#C4B99A" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <path d="M30.68,3.69l23.06,44.75" stroke="#C4B99A" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#C4B99A" stroke-width="1.38" stroke-linecap="round"/>
+              <circle fill="#C4B99A" cx="30.68" cy="3.23" r="3.23"/>
+            </svg>
+            <div style="font-size:7px;letter-spacing:3px;color:#B0A890;text-transform:uppercase;">Emboss</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="mock-label" data-i18n="mock-fav">Favicon / App Icon</div>
+        <div class="fav-row">
+          <div class="fav-box">
+            <div style="width:64px;height:64px;background:#1a2540;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="2 0 58 52" style="width:44px;height:auto;">
+                <defs><linearGradient id="lg-fv3-64" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+                <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-fv3-64)" stroke-width="4" stroke-linecap="round" fill="none"/>
+                <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle fill="#e8c27a" cx="30.68" cy="3.23" r="4"/>
+              </svg>
+            </div>
+            <div class="fav-sz">64px</div>
+          </div>
+          <div class="fav-box">
+            <div style="width:40px;height:40px;background:#1a2540;border-radius:9px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="2 0 58 52" style="width:28px;height:auto;">
+                <defs><linearGradient id="lg-fv3-40" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+                <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-fv3-40)" stroke-width="4.5" stroke-linecap="round" fill="none"/>
+                <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                <circle fill="#e8c27a" cx="30.68" cy="3.23" r="5"/>
+              </svg>
+            </div>
+            <div class="fav-sz">40px</div>
+          </div>
+          <div class="fav-box">
+            <div style="width:24px;height:24px;background:#1a2540;border-radius:5px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="5 0 52 52" style="width:18px;height:auto;">
+                <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="6" stroke-linecap="round" fill="none"/>
+                <path d="M30.68,3.69l23.06,44.75" stroke="#e8c27a" stroke-width="6" stroke-linecap="round" fill="none"/>
+                <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="white" stroke-width="3" stroke-linecap="round"/>
+                <circle fill="#e8c27a" cx="30.68" cy="3.23" r="6"/>
+              </svg>
+            </div>
+            <div class="fav-sz">24px</div>
+          </div>
+          <div class="fav-box">
+            <div style="width:16px;height:16px;background:#1a2540;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+              <svg viewBox="8 0 46 52" style="width:12px;height:auto;">
+                <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="7" stroke-linecap="round" fill="none"/>
+                <path d="M30.68,3.69l23.06,44.75" stroke="#e8c27a" stroke-width="7" stroke-linecap="round" fill="none"/>
+                <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="white" stroke-width="4" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <div class="fav-sz">16px</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EMAIL SIG -->
+<section class="sig-bg">
+  <div class="section reveal">
+    <div class="sec-label" data-i18n="sec-sig">07 · Email Signature</div>
+    <h2 class="sec-h" data-i18n="h-sig">Every email,<br/>a brand moment.</h2>
+    <p class="sec-p" data-i18n="p3-sig-p">The 人 form at small sizes becomes a confident, human mark — unmistakably I&amp;B, unmistakably warm.</p>
+    <div class="sig-demo">
+      <div style="flex-shrink:0;">
+        <svg viewBox="0 0 62.27 50.28" style="width:48px;height:auto;">
+          <defs><linearGradient id="lg-sig3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient><linearGradient id="lg-sig3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+          <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+          <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-sig3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+          <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+          <circle fill="url(#lg-sig3d)" cx="30.68" cy="3.23" r="3.23"/>
+        </svg>
+      </div>
+      <div class="sig-divider"></div>
+      <div>
+        <div class="sig-name">山田 太郎</div>
+        <div class="sig-title">代表取締役 · Chief Executive Officer</div>
+        <div class="sig-contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e49d8589858085a48d888891898d8a859081c986968d808381ca878bca8e94">[email&#160;protected]</a><br/>+81-90-XXXX-XXXX · illuminate-bridge.co.jp</div>
+        <div class="sig-co">株式会社 I&amp;B · Illuminate Bridge Co., Ltd.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-copy" data-i18n="ft-copy">© 2025 株式会社 I&amp;B · Brand Identity · Confidential</div>
+  <svg viewBox="0 0 62.27 50.28" style="width:36px;height:auto;opacity:0.2;">
+    <defs><linearGradient id="lg-ft3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
+    <path d="M30.68,3.69L9,48.44" stroke="#FEFEFE" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+    <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-ft3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+    <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#FEFEFE" stroke-width="1.38" stroke-linecap="round"/>
+    <circle fill="#e8c27a" cx="30.68" cy="3.23" r="3.23"/>
+  </svg>
+  <div class="ft-pat" data-i18n="p3-ft-pat">Pattern 03 · 人 Hito Arch</div>
+</footer>
+
+</div><!-- /panel-3 -->
+
+
+<!-- ══════════════════════════════════════════ -->
+<!--  GLOBAL FEEDBACK SECTION                  -->
+<!-- ══════════════════════════════════════════ -->
+<div class="feedback-bg">
+<div class="section reveal" id="feedback-section">
+  <form id="fb-form">
+    <div class="sec-label" data-i18n="fb-label">07 · Feedback</div>
+    <h2 class="sec-h" data-i18n="fb-heading">Which pattern speaks to you?</h2>
+    <p class="sec-p" data-i18n="fb-sub">Your perspective helps us refine the identity. All responses are confidential.</p>
+
+    <div class="fb-patterns">
+
+      <!-- P01 -->
+      <label class="fb-card">
+        <input type="radio" name="pattern" value="01 · Single Line Monogram"/>
+        <div class="fb-card-inner">
+          <svg width="80" height="28" viewBox="35 50 105 38" fill="none">
+            <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <path d="M87.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#b8873a" stroke-width="2" stroke-linecap="round" fill="none"/>
+            <line x1="43.36" y1="76.56" x2="131.36" y2="76.56" stroke="#FEFEFE" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+          <span data-i18n="fb-p1">01 · Single Line Monogram</span>
+        </div>
+      </label>
+
+      <!-- P02 -->
+      <label class="fb-card">
+        <input type="radio" name="pattern" value="02 · Illuminate Rays + Bridge"/>
+        <div class="fb-card-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.99 59.46" width="56" height="44">
+            <defs>
+              <linearGradient id="lg-fb2" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/>
+              </linearGradient>
+            </defs>
+            <circle fill="url(#lg-fb2)" cx="37.49" cy="31.05" r="5.26"/>
+            <line x1="37.49" y1="20.52" x2="37.49" y2=".53" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.9"/>
+            <line x1="45.91" y1="22.63" x2="60.12" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+            <line x1="48.02" y1="31.05" x2="70.65" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+            <line x1="45.91" y1="39.47" x2="60.12" y2="55.25" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+            <line x1="29.07" y1="22.63" x2="14.87" y2="6.84" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.7"/>
+            <line x1="26.97" y1="31.05" x2="4.34" y2="31.05" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.5"/>
+            <line x1="29.07" y1="39.47" x2="14.87" y2="55.25" stroke="#e8c27a" stroke-width="1.05" stroke-linecap="round" opacity="0.3"/>
+            <path d="M7.5,58.41c0-11.23,4.91-16.84,14.73-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <path d="M37.49,58.41c0-11.23,5.09-16.84,15.26-16.84s15.26,5.61,15.26,16.84" stroke="#FEFEFE" stroke-width="2.1" stroke-linecap="round" fill="none"/>
+            <line x1=".66" y1="58.41" x2="74.33" y2="58.41" stroke="#FEFEFE" stroke-width="1.32" stroke-linecap="round"/>
+          </svg>
+          <span data-i18n="fb-p2">02 · Illuminate Rays + Bridge</span>
+        </div>
+      </label>
+
+      <!-- P03 -->
+      <label class="fb-card">
+        <input type="radio" name="pattern" value="03 · 人 Hito Arch"/>
+        <div class="fb-card-inner">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.27 50.28" width="56" height="46">
+            <defs>
+              <linearGradient id="lg-fb3-r" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0" stop-color="#c8963e"/>
+                <stop offset="1" stop-color="#e8c27a"/>
+              </linearGradient>
+              <linearGradient id="lg-fb3-dot" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="#c8963e"/>
+                <stop offset="1" stop-color="#e8c27a"/>
+              </linearGradient>
+            </defs>
+            <path d="M30.68,3.69L9,48.44" stroke="#FEFEFE" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-fb3-r)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#FEFEFE" stroke-width="1.38" stroke-linecap="round"/>
+            <circle fill="url(#lg-fb3-dot)" cx="30.68" cy="3.23" r="3.23"/>
+          </svg>
+          <span data-i18n="fb-p3">03 · 人 Hito Arch</span>
+        </div>
+      </label>
+
+      <!-- None -->
+      <label class="fb-card fb-card-none">
+        <input type="radio" name="pattern" value="None of the above"/>
+        <div class="fb-card-inner">
+          <span data-i18n="fb-none">None of the above</span>
+        </div>
+      </label>
+
+    </div>
+
+    <textarea class="fb-textarea" data-i18n-placeholder="fb-placeholder" placeholder="Any thoughts or suggestions..."></textarea>
+    <button type="submit" class="fb-submit" data-i18n="fb-submit">Send Feedback</button>
+    <div class="fb-error" id="fb-error" data-i18n="fb-error">Something went wrong. Please try again.</div>
+  </form>
+  <div class="fb-success" id="fb-success" data-i18n="fb-success">Thank you — your feedback has been received.</div>
+</div>
+</div><!-- /feedback -->
+
+
+<script>
+(function() {
+  function switchPattern(num) {
+    document.querySelectorAll('.pattern-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.getElementById('panel-' + num).classList.add('active');
+    document.querySelectorAll('.nav-pills .nav-pill').forEach(function(b, i) { b.classList.toggle('active', i + 1 === num); });
+    document.querySelectorAll('.nav-drawer .nav-pill').forEach(function(b, i) { b.classList.toggle('active', i + 1 === num); });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    setTimeout(function() {
+      var els = document.querySelectorAll('#panel-' + num + ' .reveal');
+      els.forEach(function(el) { el.classList.remove('visible'); el.classList.add('will-animate'); });
+      var io = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e, i) {
+          if (e.isIntersecting) {
+            setTimeout(function() { e.target.classList.remove('will-animate'); e.target.classList.add('visible'); }, i * 60);
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      els.forEach(function(el) { io.observe(el); });
+    }, 100);
+  }
+
+  function toggleDrawer() {
+    document.getElementById('navDrawer').classList.toggle('open');
+    document.getElementById('hamburger').classList.toggle('open');
+  }
+
+  document.addEventListener('click', function(e) {
+    var drawer = document.getElementById('navDrawer');
+    var burger = document.getElementById('hamburger');
+    if (drawer.classList.contains('open') && !drawer.contains(e.target) && !burger.contains(e.target)) {
+      drawer.classList.remove('open');
+      burger.classList.remove('open');
+    }
+  });
+
+  window.switchPattern = switchPattern;
+  window.toggleDrawer = toggleDrawer;
+
+  /* ── LANGUAGE TOGGLE ── */
+  var translations = {
+    en: {
+      'nav-logo': 'I&amp;B · Brand Deck',
+      'sec-brand-story': '01 · Brand Story',
+      'sec-lockups': '02 · Logo Lockups',
+      'sec-colors': '03 · Color System',
+      'sec-type': '04 · Typography',
+      'sec-rules': '05 · Usage Rules',
+      'sec-apps': '06 · Applications',
+      'sec-sig': '07 · Email Signature',
+      'fb-label': '07 · Feedback',
+      'fb-heading': 'Which pattern speaks to you?',
+      'fb-sub': 'Your perspective helps us refine the identity. All responses are confidential.',
+      'fb-p1': '01 · Single Line Monogram',
+      'fb-p2': '02 · Illuminate Rays + Bridge',
+      'fb-p3': '03 · 人 Hito Arch',
+      'fb-none': 'None of the above',
+      'fb-placeholder': 'Any thoughts or suggestions...',
+      'fb-submit': 'Send Feedback',
+      'fb-success': 'Thank you — your feedback has been received.',
+      'fb-error': 'Something went wrong. Please try again.',
+      'h-lockups': 'Mark, wordmark,<br/>and full lockup.',
+      'h-rules': 'How to use it,<br/>and how not to.',
+      'h-apps': 'The mark in the<br/>real world.',
+      'h-sig': 'Every email,<br/>a brand moment.',
+      'lk-icon-light': 'Icon Only · Light',
+      'lk-wm-light': 'Icon + Wordmark · Light',
+      'lk-fn-light': 'Icon + Full Name · Light',
+      'lk-icon-dark': 'Icon Only · Dark',
+      'lk-wm-dark': 'Icon + Wordmark · Dark',
+      'lk-mono': 'Monochrome · Neutral',
+      'lk-wm-only-light': 'Wordmark Only · Light',
+      'lk-wm-only-dark': 'Wordmark Only · Dark',
+      'mock-card-front': 'Business Card — Front',
+      'mock-card-back': 'Business Card — Back',
+      'mock-stamp': 'Stamp &amp; Emboss',
+      'mock-fav': 'Favicon / App Icon',
+      'ft-copy': '© 2025 株式会社 I&amp;B · Brand Identity · Confidential',
+      // Panel 1
+      'p1-eyebrow': 'Brand Identity Proposal · 株式会社 I&amp;B',
+      'p1-cover-title': 'Pattern <span>01</span><br/>Single Line Monogram',
+      'p1-cover-sub': 'Illuminate Bridge · Brand System',
+      'p1-cover-badge': 'Design Pattern 01 / 03',
+      'p1-story-h': 'Two arches.<br/>One horizon.<br/>One shared future.',
+      'p1-story-p1': 'The Single Line Monogram reduces I&amp;B\'s philosophy to its most essential gesture — two arches drawn with quiet confidence, resting on a single shared line. The left arch, in deep navy, stands for one person. The right arch, in warm gold, stands for another. The line beneath them is not a base; it is a bridge.',
+      'p1-story-p2': 'This is not a complicated mark. It was never meant to be. The strength of Illuminate Bridge has always been in the clarity of its purpose — to connect people, illuminate the path between them, and move forward with sincerity.',
+      'p1-story-p3': 'Decades from now, this mark will read the same. Precise enough for a business card emboss. Confident enough to stand alone on a signboard. Warm enough to feel human.',
+      'p1-lockups-p': 'Three configurations for every context — from favicon to signage.',
+      'p1-colors-h': 'A palette built on<br/>trust and warmth.',
+      'p1-colors-p': 'Navy anchors authority and longevity. Gold carries the warmth, humanity, and the spirit of "illuminate." Together they never go out of fashion.',
+      'p1-type-h': 'The typeface that<br/>comes with the mark.',
+      'p1-type-p': 'Helvetica Neue is the native font of this logo. For headlines and display text, Cormorant Garamond adds warmth and elegance.',
+      'p1-rules-p': 'Consistency builds recognition over time. These rules protect the integrity of the mark across every application.',
+      'p1-rule1-title': 'Clear Space',
+      'p1-rule1-body': 'Always maintain clear space equal to half the mark\'s height on all sides. Never crowd the logo with other elements.',
+      'p1-rule2-title': 'Minimum Size',
+      'p1-rule2-body': 'Below 24px digitally or 10mm in print, use text-only lockup to preserve legibility.',
+      'p1-rule3-title': 'Do Not Distort',
+      'p1-rule3-body': 'Never stretch, rotate, or skew the mark. Always scale uniformly from a corner.',
+      'p1-rule4-title': 'Approved Colors Only',
+      'p1-rule4-body': 'Only use Navy + Gold (color), full Navy (1-color), or full White (reversed). No other combinations.',
+      'p1-apps-p': 'From the first handshake to the digital touchpoint — every application should feel considered and consistent.',
+      'p1-sig-p': 'The signature carries the mark into daily communication, reinforcing recognition quietly with every message sent.',
+      'p1-ft-pat': 'Pattern 01 · Single Line Monogram',
+      // Panel 2
+      'p2-eyebrow': 'Brand Identity Proposal · 株式会社 I&amp;B',
+      'p2-cover-title': 'Pattern <span>02</span><br/>Illuminate Rays + Bridge',
+      'p2-cover-sub': 'Illuminate Bridge · Brand System',
+      'p2-cover-badge': 'Design Pattern 02 / 03',
+      'p2-story-h': 'Light radiates.<br/>The bridge holds.<br/>People find each other.',
+      'p2-story-p1': 'The Illuminate Rays + Bridge mark begins with a single gold circle — a point of light. From it, rays extend outward in every direction, the way a single encounter can ripple into a life-changing connection. Below it, two arches rest on a shared baseline: the bridge between people.',
+      'p2-story-p2': 'This is the most direct expression of the name Illuminate Bridge. The mark does not hide its meaning — it announces it. The light source is the company itself: always at the center, always radiating warmth, always connecting the two sides of every bridge it builds.',
+      'p2-story-p3': 'The rays fade with distance — a deliberate choice. Warmth and influence are strongest at the source, softer at the edges. This gives the mark depth and humanity that a simpler symbol cannot achieve.',
+      'p2-lockups-p': 'Three configurations — from app icon to letterhead.',
+      'p2-colors-h': 'The same palette —<br/>gold takes center stage.',
+      'p2-colors-p': 'In this pattern, gold is the hero — the source of light. Navy grounds the bridge. The hierarchy shifts but the brand language stays the same.',
+      'p2-type-h': 'Georgia for the mark.<br/>Helvetica Neue for everything else.',
+      'p2-type-p': 'Pattern 02 uses Georgia for the wordmark — its serifs echo the warmth of the gold rays. Helvetica Neue handles all supporting communication.',
+      'p2-rules-p': 'The rays carry precise opacity values — never flatten them. The mark\'s sense of depth depends entirely on this hierarchy.',
+      'p2-rule1-title': 'Preserve Ray Opacity',
+      'p2-rule1-body': 'Rays use graduated opacity: 0.9 → 0.7 → 0.5 → 0.3. This simulates natural light falloff and must never be overridden.',
+      'p2-rule2-title': 'Clear Space',
+      'p2-rule2-body': 'Clear space must account for the outermost ray tips — not just the bridge base. The rays define the full extent of the mark.',
+      'p2-rule3-title': 'Do Not Distort',
+      'p2-rule3-body': 'The ray angles are geometrically precise and symmetrical. Any stretch or rotation destroys the radial balance of the light source.',
+      'p2-rule4-title': 'Approved Colors Only',
+      'p2-rule4-body': 'Gold rays + Navy bridge on light backgrounds. White/light-gold rays on dark backgrounds. No other color combinations.',
+      'p2-apps-p': 'The gold circle makes this mark instantly recognisable at small sizes — a strong advantage for digital use.',
+      'p2-sig-p': 'The gold dot and rays are recognisable even at small sizes — a warm, human presence in every inbox.',
+      'p2-ft-pat': 'Pattern 02 · Illuminate Rays + Bridge',
+      // Panel 3
+      'p3-eyebrow': 'Brand Identity Proposal · 株式会社 I&amp;B',
+      'p3-cover-title': 'Pattern <span>03</span><br/>人 · Hito Arch',
+      'p3-cover-sub': 'Illuminate Bridge · Brand System',
+      'p3-cover-badge': 'Design Pattern 03 / 03',
+      'p3-story-h': 'A single stroke.<br/>A person. A bridge.<br/>Everything at once.',
+      'p3-story-p1': 'The 人 (Hito) Arch is the most poetic of the three marks. A single kanji — 人, meaning "person" — is abstracted into a pure geometric form: two diverging lines rising from a shared gold point, set upon a grounding baseline.',
+      'p3-story-p2': 'The left leg descends in deep navy. The right leg flows downward in warm gold. The apex — that single circle of light — is the human being at the center of every connection I&amp;B creates. Two paths. One origin. One ground to stand on.',
+      'p3-story-p3': 'This mark speaks in the language of Japanese visual culture without being literal. Any viewer — Japanese or international — will sense its human quality immediately. It is the most universal and enduring of the three patterns.',
+      'p3-lockups-p': 'Three configurations. The mark is strong enough to stand completely alone.',
+      'p3-colors-h': 'Navy and gold —<br/>humanity in two colors.',
+      'p3-colors-p': 'The two-tone mark makes the palette its own story. Navy is the quiet, grounding side of every human connection. Gold is the warmth that draws people forward.',
+      'p3-type-h': 'Helvetica Neue.<br/>All-caps. Wide-tracked.',
+      'p3-type-p': 'The full-name lockup uses Helvetica Neue in all-caps with generous letter-spacing — a confident, architectural companion to the minimal mark above it.',
+      'p3-rules-p': 'The asymmetry of the mark is intentional — the right leg is longer than the left. Never mirror or make it symmetrical.',
+      'p3-rule1-title': 'Preserve Asymmetry',
+      'p3-rule1-body': 'The right leg is intentionally longer, mirroring the 人 kanji stroke. Never make the legs equal length or mirror the mark.',
+      'p3-rule2-title': 'Clear Space',
+      'p3-rule2-body': 'The legs extend to the edges of the bounding box. Clear space is measured from the outermost points — the leg ends and the apex dot.',
+      'p3-rule3-title': 'Do Not Distort',
+      'p3-rule3-body': 'Never stretch or squish the mark. The proportions of the 人 form are fixed. Always scale uniformly.',
+      'p3-rule4-title': 'Approved Colors Only',
+      'p3-rule4-body': 'Left leg: Navy only. Right leg: Gold gradient only. On dark backgrounds, left leg turns white. Apex dot is always gold.',
+      'p3-apps-p': 'The 人 form is immediately legible at any size — its boldness at small scales makes it an exceptional app icon and stamp mark.',
+      'p3-sig-p': 'The 人 form at small sizes becomes a confident, human mark — unmistakably I&amp;B, unmistakably warm.',
+      'p3-ft-pat': 'Pattern 03 · 人 Hito Arch'
+    },
+    jp: {
+      'nav-logo': 'I&amp;B · ブランドデッキ',
+      'sec-brand-story': '01 · ブランドストーリー',
+      'sec-lockups': '02 · ロゴ展開',
+      'sec-colors': '03 · カラーシステム',
+      'sec-type': '04 · タイポグラフィ',
+      'sec-rules': '05 · 使用ルール',
+      'sec-apps': '06 · 活用事例',
+      'sec-sig': '07 · メール署名',
+      'fb-label': '07 · フィードバック',
+      'fb-heading': 'どのパターンが響きましたか？',
+      'fb-sub': 'ご意見はブランドの洗練に役立てます。回答は秘密厳守です。',
+      'fb-p1': '01 · シングルライン モノグラム',
+      'fb-p2': '02 · イルミネート レイズ + ブリッジ',
+      'fb-p3': '03 · 人 ヒトアーチ',
+      'fb-none': '該当なし',
+      'fb-placeholder': 'ご意見・ご感想をどうぞ...',
+      'fb-submit': '送信する',
+      'fb-success': 'ありがとうございます — フィードバックを受け取りました。',
+      'fb-error': '送信に失敗しました。もう一度お試しください。',
+      'h-lockups': 'マーク、ワードマーク、<br/>フルロックアップ。',
+      'h-rules': '使い方と<br/>してはいけないこと。',
+      'h-apps': 'リアルな場面での<br/>マーク活用。',
+      'h-sig': 'すべてのメールが、<br/>ブランドの瞬間。',
+      'lk-icon-light': 'アイコンのみ · ライト',
+      'lk-wm-light': 'アイコン + ワードマーク · ライト',
+      'lk-fn-light': 'アイコン + フルネーム · ライト',
+      'lk-icon-dark': 'アイコンのみ · ダーク',
+      'lk-wm-dark': 'アイコン + ワードマーク · ダーク',
+      'lk-mono': 'モノクローム · ニュートラル',
+      'lk-wm-only-light': 'ワードマークのみ · ライト',
+      'lk-wm-only-dark': 'ワードマークのみ · ダーク',
+      'mock-card-front': '名刺 — 表',
+      'mock-card-back': '名刺 — 裏',
+      'mock-stamp': 'スタンプ &amp; エンボス',
+      'mock-fav': 'ファビコン / アプリアイコン',
+      'ft-copy': '© 2025 株式会社 I&amp;B · ブランドアイデンティティ · 社外秘',
+      // Panel 1
+      'p1-eyebrow': 'ブランドアイデンティティ提案 · 株式会社 I&amp;B',
+      'p1-cover-title': 'パターン <span>01</span><br/>シングルライン モノグラム',
+      'p1-cover-sub': 'イルミネイト ブリッジ · ブランドシステム',
+      'p1-cover-badge': 'デザインパターン 01 / 03',
+      'p1-story-h': '二つのアーチ。<br/>一つの地平線。<br/>共に歩む未来。',
+      'p1-story-p1': 'シングルライン モノグラムは、I&amp;Bの哲学を最もシンプルなかたちに凝縮しています――静かな自信をもって描かれた二つのアーチが、一本の共有された線の上に宿ります。左のアーチは深いネイビーで一人の人を表し、右のアーチは温かみのあるゴールドでもう一人を表しています。その下の線は土台ではなく、橋なのです。',
+      'p1-story-p2': 'このマークは複雑ではありません。そもそもそうあるべきではないのです。Illuminate Bridgeの強さは、その目的の明確さにあります――人と人をつなぎ、その間の道を照らし、誠実さをもって前進すること。',
+      'p1-story-p3': '数十年後も、このマークは同じように読まれるでしょう。名刺のエンボスに耐えうる精度。看板に単独で存在できる存在感。人間らしさを感じさせる温かさ。',
+      'p1-lockups-p': 'ファビコンからサイネージまで、あらゆる場面に対応する三種類の展開。',
+      'p1-colors-h': '信頼と温かみに基づく<br/>カラーパレット。',
+      'p1-colors-p': 'ネイビーは権威と永続性を表します。ゴールドは温かさと人間性、そして「illuminate（照らす）」の精神を宿しています。二色の組み合わせは時代を超えます。',
+      'p1-type-h': 'マークとともに<br/>あるタイポグラフィ。',
+      'p1-type-p': 'Helvetica Neueはこのロゴのネイティブフォントです。見出しやディスプレイテキストには、Cormorant Garamondが温かみとエレガンスを加えます。',
+      'p1-rules-p': '一貫性が認知を育てます。これらのルールは、あらゆる場面でマークの完全性を守るためのものです。',
+      'p1-rule1-title': 'クリアスペース',
+      'p1-rule1-body': 'マークの高さの半分に相当するクリアスペースを常に四方に確保してください。他の要素でロゴを圧迫しないでください。',
+      'p1-rule2-title': '最小サイズ',
+      'p1-rule2-body': 'デジタルで24px以下、印刷で10mm以下の場合は、可読性を保つためテキストのみのロックアップを使用してください。',
+      'p1-rule3-title': '変形禁止',
+      'p1-rule3-body': 'マークを引き伸ばしたり、回転させたり、傾けたりしないでください。常にコーナーから均等にスケールしてください。',
+      'p1-rule4-title': '承認済みカラーのみ使用可',
+      'p1-rule4-body': 'ネイビー＋ゴールド（カラー）、フルネイビー（1色）、またはフルホワイト（反転）のみ使用できます。他の組み合わせは禁止です。',
+      'p1-apps-p': '最初の握手からデジタルのタッチポイントまで――すべての場面において、考え抜かれた一貫性を感じさせる必要があります。',
+      'p1-sig-p': '署名は日常のコミュニケーションにマークを届け、送信するたびにブランド認知を静かに高めます。',
+      'p1-ft-pat': 'パターン 01 · シングルライン モノグラム',
+      // Panel 2
+      'p2-eyebrow': 'ブランドアイデンティティ提案 · 株式会社 I&amp;B',
+      'p2-cover-title': 'パターン <span>02</span><br/>イルミネイト レイズ + ブリッジ',
+      'p2-cover-sub': 'イルミネイト ブリッジ · ブランドシステム',
+      'p2-cover-badge': 'デザインパターン 02 / 03',
+      'p2-story-h': '光が放たれる。<br/>橋が支える。<br/>人々が出会う。',
+      'p2-story-p1': 'イルミネイト レイズ + ブリッジのマークは、一つのゴールドの円――光の点――から始まります。そこから光線があらゆる方向に広がります。一つの出会いが人生を変える縁へと波及するように。その下に、二つのアーチが共有された基準線の上に宿ります：人と人をつなぐ橋です。',
+      'p2-story-p2': 'これはIlluminate Bridgeという名前の最も直接的な表現です。マークはその意味を隠しません――宣言します。光源は会社そのものです：常に中心にあり、常に温かさを放ち、常に架ける橋の両側をつなぎます。',
+      'p2-story-p3': '光線は距離とともに薄れます――意図的な選択です。温かさと影響力は源で最も強く、端に向かって柔らかくなります。これにより、より単純なシンボルでは達成できない深みと人間性がマークに生まれます。',
+      'p2-lockups-p': 'アプリアイコンからレターヘッドまで、三種類の展開。',
+      'p2-colors-h': '同じパレット――<br/>ゴールドが主役へ。',
+      'p2-colors-p': 'このパターンでは、ゴールドが主役――光の源です。ネイビーが橋を支えます。ヒエラルキーは変わりますが、ブランド言語は同じです。',
+      'p2-type-h': 'マークにはGeorgia。<br/>それ以外はHelvetica Neue。',
+      'p2-type-p': 'パターン02はワードマークにGeorgiaを使用します――そのセリフがゴールドの光線の温かさを反響させます。Helvetica Neueがすべてのサポートコミュニケーションを担当します。',
+      'p2-rules-p': '光線には正確な不透明度の値があります――決して均一化しないでください。マークの奥行き感はこのヒエラルキーに完全に依存しています。',
+      'p2-rule1-title': '光線の不透明度を保持',
+      'p2-rule1-body': '光線は段階的な不透明度を使用します：0.9 → 0.7 → 0.5 → 0.3。これは自然な光の減衰をシミュレートしており、絶対に上書きしてはなりません。',
+      'p2-rule2-title': 'クリアスペース',
+      'p2-rule2-body': 'クリアスペースは橋の基部だけでなく、最外部の光線の先端まで考慮する必要があります。光線がマークの全範囲を定義します。',
+      'p2-rule3-title': '変形禁止',
+      'p2-rule3-body': '光線の角度は幾何学的に正確かつ対称です。引き伸ばしや回転は光源の放射状バランスを破壊します。',
+      'p2-rule4-title': '承認済みカラーのみ使用可',
+      'p2-rule4-body': 'ライト背景ではゴールドの光線 + ネイビーの橋。ダーク背景ではホワイト/ライトゴールドの光線。他の色の組み合わせは禁止です。',
+      'p2-apps-p': 'ゴールドの円が小さなサイズでもこのマークを即座に認識可能にします――デジタル用途での大きな強みです。',
+      'p2-sig-p': 'ゴールドのドットと光線は小さなサイズでも認識しやすく、すべての受信トレイに温かみのある人間的な存在感をもたらします。',
+      'p2-ft-pat': 'パターン 02 · イルミネイト レイズ + ブリッジ',
+      // Panel 3
+      'p3-eyebrow': 'ブランドアイデンティティ提案 · 株式会社 I&amp;B',
+      'p3-cover-title': 'パターン <span>03</span><br/>人 · ヒト アーチ',
+      'p3-cover-sub': 'イルミネイト ブリッジ · ブランドシステム',
+      'p3-cover-badge': 'デザインパターン 03 / 03',
+      'p3-story-h': '一本の線。<br/>一人の人。橋。<br/>すべてが一度に。',
+      'p3-story-p1': '人（ヒト）アーチは、三つのマークの中で最も詩的なものです。一つの漢字――「人」、意味は「人間」――が純粋な幾何学的形態に抽象化されています：共有されたゴールドの点から伸びる二本の分岐する線が、基盤となるベースラインの上に置かれています。',
+      'p3-story-p2': '左の脚は深いネイビーで降ります。右の脚は温かいゴールドで流れ落ちます。頂点――その光の一点の円――はI&amp;Bが作り出すすべてのつながりの中心にいる人間です。二つの道。一つの起源。立つための共通の地。',
+      'p3-story-p3': 'このマークは文字通りではなく、日本の視覚文化の言語で語ります。日本人でも外国人でも、あらゆる見る人がその人間的な性質を即座に感じ取ります。三つのパターンの中で最も普遍的で永続的なものです。',
+      'p3-lockups-p': '三種類の展開。マークは単独でも十分な存在感を持っています。',
+      'p3-colors-h': 'ネイビーとゴールド――<br/>二色で表す人間性。',
+      'p3-colors-p': '二色のマークがパレット自体をストーリーにします。ネイビーはすべての人間のつながりの静かで根拠のある側面です。ゴールドは人々を前に引き寄せる温かさです。',
+      'p3-type-h': 'Helvetica Neue。<br/>全大文字。広いトラッキング。',
+      'p3-type-p': 'フルネームロックアップはHelvetica Neueを全大文字、広いレタースペーシングで使用しています――その上のミニマルなマークに対する自信に満ちた建築的な伴侶です。',
+      'p3-rules-p': 'マークの非対称性は意図的なものです――右脚は左脚より長い。決してミラーリングしたり対称にしたりしないでください。',
+      'p3-rule1-title': '非対称性を保持',
+      'p3-rule1-body': '右脚は意図的に長く、人の漢字のストロークを反映しています。脚の長さを等しくしたり、マークをミラーリングしたりしないでください。',
+      'p3-rule2-title': 'クリアスペース',
+      'p3-rule2-body': '脚はバウンディングボックスの端まで伸びています。クリアスペースは最も外側の点――脚の端と頂点のドット――から測定されます。',
+      'p3-rule3-title': '変形禁止',
+      'p3-rule3-body': 'マークを引き伸ばしたり押しつぶしたりしないでください。人の形のプロポーションは固定されています。常に均等にスケールしてください。',
+      'p3-rule4-title': '承認済みカラーのみ使用可',
+      'p3-rule4-body': '左脚：ネイビーのみ。右脚：ゴールドグラデーションのみ。ダーク背景では左脚がホワイトになります。頂点のドットは常にゴールドです。',
+      'p3-apps-p': '「人」の形はどんなサイズでも即座に読み取れます――小さなサイズでの大胆さが、優れたアプリアイコンとスタンプマークにしています。',
+      'p3-sig-p': '小さなサイズでの「人」の形は、力強く人間的なマークになります――紛れもなくI&amp;B、紛れもなく温かい。',
+      'p3-ft-pat': 'パターン 03 · 人 ヒト アーチ'
+    }
+  };
+
+  var currentLang = 'en';
+
+  function toggleLang() {
+    currentLang = currentLang === 'en' ? 'jp' : 'en';
+    document.querySelectorAll('[data-i18n]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n');
+      var text = translations[currentLang][key];
+      if (text !== undefined) { el.innerHTML = text; }
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+      var key = el.getAttribute('data-i18n-placeholder');
+      var text = translations[currentLang][key];
+      if (text !== undefined) { el.placeholder = text; }
+    });
+    var btn = document.getElementById('langToggle');
+    btn.textContent = currentLang === 'en' ? 'JP' : 'EN';
+    document.documentElement.lang = currentLang === 'jp' ? 'ja' : 'en';
+  }
+
+  window.toggleLang = toggleLang;
+
+  // Feedback form (Formspree)
+  var fbForm = document.getElementById('fb-form');
+  if (fbForm) {
+    fbForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = fbForm.querySelector('.fb-submit');
+      var success = document.getElementById('fb-success');
+      var error = document.getElementById('fb-error');
+      var pattern = fbForm.querySelector('input[name="pattern"]:checked');
+      btn.disabled = true;
+      fetch('https://formspree.io/f/xwvrldyk', {
+        method: 'POST',
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          preferred_pattern: pattern ? pattern.value : 'No selection',
+          comment: fbForm.querySelector('textarea').value
+        })
+      }).then(function(res) {
+        if (res.ok) {
+          fbForm.style.display = 'none';
+          success.style.display = 'block';
+        } else {
+          error.style.display = 'block';
+          btn.disabled = false;
+        }
+      }).catch(function() {
+        error.style.display = 'block';
+        btn.disabled = false;
+      });
+    });
+  }
+
+  // Reveal animation for global feedback section
+  (function() {
+    var el = document.getElementById('feedback-section');
+    if (!el) return;
+    el.classList.add('will-animate');
+    var io = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.remove('will-animate');
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    io.observe(el);
+  })();
+
+})();
+</script>
+</body>
+</html>
