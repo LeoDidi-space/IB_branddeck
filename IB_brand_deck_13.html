@@ -1710,16 +1710,7 @@
     document.getElementById('panel-' + num).classList.add('active');
     document.querySelectorAll('.nav-pills .nav-pill').forEach(function(b, i) { b.classList.toggle('active', i + 1 === num); });
     document.querySelectorAll('.nav-drawer .nav-pill').forEach(function(b, i) { b.classList.toggle('active', i + 1 === num); });
-    // Coming Soon overlay (pattern 3 only)
-    var csScreen = document.getElementById('cs-screen');
-    var csPill = document.getElementById('cs-pill');
-    if (num === 3) {
-      var labels = { 3: 'Pattern 03 · 人 Hito Arch' };
-      csPill.textContent = labels[num];
-      csScreen.classList.add('visible');
-    } else {
-      csScreen.classList.remove('visible');
-    }
+    document.getElementById('cs-screen').classList.remove('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(function() {
       var els = document.querySelectorAll('#panel-' + num + ' .reveal');
