@@ -235,7 +235,7 @@
     display: flex; flex-wrap: wrap; gap: 16px;
     justify-content: center; margin: 48px 0 40px;
   }
-  .fb-card input[type="radio"] { display: none; }
+  .fb-card input[type="checkbox"] { display: none; }
   .fb-card-inner {
     display: flex; flex-direction: column; align-items: center; gap: 20px;
     padding: 32px 24px; border-radius: 8px;
@@ -1621,14 +1621,14 @@
 <div class="section reveal" id="feedback-section">
   <form id="fb-form">
     <div class="sec-label" data-i18n="fb-label">07 · Feedback</div>
-    <h2 class="sec-h" data-i18n="fb-heading">Which pattern speaks to you?</h2>
-    <p class="sec-p" data-i18n="fb-sub">Your perspective helps us refine the identity. All responses are confidential.</p>
+    <h2 class="sec-h" data-i18n="fb-heading">Which pattern(s) speak to you?</h2>
+    <p class="sec-p" data-i18n="fb-sub">Select all that apply. Your perspective helps us refine the identity. All responses are confidential.</p>
 
     <div class="fb-patterns">
 
       <!-- P01 -->
       <label class="fb-card">
-        <input type="radio" name="pattern" value="01 · Single Line Monogram"/>
+        <input type="checkbox" name="pattern" value="01 · Single Line Monogram"/>
         <div class="fb-card-inner">
           <svg width="80" height="28" viewBox="35 50 105 38" fill="none">
             <path d="M51.36,75.79c0-16.67,6-25,18-25s18,8.33,18,25" stroke="#FEFEFE" stroke-width="2" stroke-linecap="round" fill="none"/>
@@ -1641,7 +1641,7 @@
 
       <!-- P02 -->
       <label class="fb-card">
-        <input type="radio" name="pattern" value="02 · Illuminate Rays"/>
+        <input type="checkbox" name="pattern" value="02 · Illuminate Rays"/>
         <div class="fb-card-inner">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 64 36" width="56" height="36">
             <defs>
@@ -1662,7 +1662,7 @@
 
       <!-- P03 -->
       <label class="fb-card">
-        <input type="radio" name="pattern" value="03 · 人 Hito Arch"/>
+        <input type="checkbox" name="pattern" value="03 · 人 Hito Arch"/>
         <div class="fb-card-inner">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.27 50.28" width="56" height="46">
             <defs>
@@ -1686,7 +1686,7 @@
 
       <!-- None -->
       <label class="fb-card fb-card-none">
-        <input type="radio" name="pattern" value="None of the above"/>
+        <input type="checkbox" name="pattern" value="None of the above"/>
         <div class="fb-card-inner">
           <span data-i18n="fb-none">None of the above</span>
         </div>
@@ -1756,8 +1756,8 @@
       'sec-apps': '06 · Applications',
       'sec-sig': '07 · Email Signature',
       'fb-label': '07 · Feedback',
-      'fb-heading': 'Which pattern speaks to you?',
-      'fb-sub': 'Your perspective helps us refine the identity. All responses are confidential.',
+      'fb-heading': 'Which pattern(s) speak to you?',
+      'fb-sub': 'Select all that apply. Your perspective helps us refine the identity. All responses are confidential.',
       'fb-p1': '01 · Single Line Monogram',
       'fb-p2': '02 · Illuminate Rays',
       'fb-p3': '03 · 人 Hito Arch',
@@ -1875,8 +1875,8 @@
       'sec-apps': '06 · 活用事例',
       'sec-sig': '07 · メール署名',
       'fb-label': '07 · フィードバック',
-      'fb-heading': 'どのパターンが響きましたか？',
-      'fb-sub': 'ご意見はブランドの洗練に役立てます。回答は秘密厳守です。',
+      'fb-heading': 'どのパターンが響きましたか？（複数選択可）',
+      'fb-sub': '当てはまるものをすべてお選びください。ご意見はブランドの洗練に役立てます。回答は秘密厳守です。',
       'fb-p1': '01 · シングルライン モノグラム',
       'fb-p2': '02 · イルミネイト レイズ',
       'fb-p3': '03 · 人 ヒトアーチ',
@@ -2007,6 +2007,22 @@
 
   window.toggleLang = toggleLang;
 
+  // Multi-select checkbox: "None" is mutually exclusive with pattern selections
+  var patternCheckboxes = document.querySelectorAll('input[name="pattern"]');
+  patternCheckboxes.forEach(function(cb) {
+    cb.addEventListener('change', function() {
+      if (this.value === 'None of the above' && this.checked) {
+        patternCheckboxes.forEach(function(other) {
+          if (other.value !== 'None of the above') other.checked = false;
+        });
+      } else if (this.value !== 'None of the above' && this.checked) {
+        patternCheckboxes.forEach(function(other) {
+          if (other.value === 'None of the above') other.checked = false;
+        });
+      }
+    });
+  });
+
   // Feedback form (Formspree)
   var fbForm = document.getElementById('fb-form');
   if (fbForm) {
@@ -2015,13 +2031,14 @@
       var btn = fbForm.querySelector('.fb-submit');
       var success = document.getElementById('fb-success');
       var error = document.getElementById('fb-error');
-      var pattern = fbForm.querySelector('input[name="pattern"]:checked');
+      var checked = fbForm.querySelectorAll('input[name="pattern"]:checked');
+      var patternValues = Array.from(checked).map(function(cb) { return cb.value; });
       btn.disabled = true;
       fetch('https://formspree.io/f/xwvrldyk', {
         method: 'POST',
         headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          preferred_pattern: pattern ? pattern.value : 'No selection',
+          preferred_pattern: patternValues.length ? patternValues.join(' + ') : 'No selection',
           comment: fbForm.querySelector('textarea').value
         })
       }).then(function(res) {
