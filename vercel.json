@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/", "destination": "/IB_brand_deck_13.html" }
+  ]
+}
