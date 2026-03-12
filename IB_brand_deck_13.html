@@ -331,12 +331,23 @@
     color: rgba(255,255,255,0.25);
   }
 
+  /* ── PATTERN 3 — Forest palette override ── */
+  #panel-3 {
+    --navy: #1E3229;
+    --cream: #F2F0EA;
+  }
+
+  /* ── NAV per-pattern color ── */
+  .pattern-nav[data-pattern="2"] { background: #2E3D68; }
+  .pattern-nav[data-pattern="3"] { background: #1E3229; }
+  .pattern-nav[data-pattern="3"] .nav-pill.active { color: #1E3229; }
+
 </style>
 </head>
 <body>
 
 <!-- ══════════ FIXED NAV ══════════ -->
-<nav class="pattern-nav">
+<nav class="pattern-nav" data-pattern="1">
   <div class="nav-logo" data-i18n="nav-logo">I&amp;B · Brand Deck</div>
   <div class="nav-pills">
     <button class="nav-pill active" onclick="switchPattern(1)">01 · Single Line</button>
@@ -1211,7 +1222,7 @@
       <div>
         <p class="sec-p" data-i18n="p3-story-p1">The 人 (Hito) Arch is the most poetic of the three marks. A single kanji — 人, meaning "person" — is abstracted into a pure geometric form: two diverging lines rising from a shared gold point, set upon a grounding baseline.</p>
         <br/>
-        <p class="sec-p" data-i18n="p3-story-p2">The left leg descends in deep navy. The right leg flows downward in warm gold. The apex — that single circle of light — is the human being at the center of every connection I&amp;B creates. Two paths. One origin. One ground to stand on.</p>
+        <p class="sec-p" data-i18n="p3-story-p2">The left leg descends in deep forest. The right leg flows downward in warm gold. The apex — that single circle of light — is the human being at the center of every connection I&amp;B creates. Two paths. One origin. One ground to stand on.</p>
         <br/>
         <p class="sec-p" data-i18n="p3-story-p3">This mark speaks in the language of Japanese visual culture without being literal. Any viewer — Japanese or international — will sense its human quality immediately. It is the most universal and enduring of the three patterns.</p>
       </div>
@@ -1245,9 +1256,9 @@
           <linearGradient id="lg-lk1p3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
           <linearGradient id="lg-dot1p3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
         </defs>
-        <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
         <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-lk1p3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-        <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+        <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
         <circle fill="url(#lg-dot1p3)" cx="30.68" cy="3.23" r="3.23"/>
       </svg>
       <div class="lk-cap" data-i18n="lk-icon-light">Icon Only · Light</div>
@@ -1256,8 +1267,8 @@
     <!-- Wordmark Only · Light -->
     <div class="lk reveal">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86.25 52.27" style="width:160px;height:auto;">
-        <path fill="#1a2540" d="M0,0h3.17v51.41H0V0Z"/>
-        <path fill="#1a2540" d="M47.73,0h20.59c3.07,0,5.64.38,7.7,1.15,2.06.77,3.72,1.78,4.97,3.02,1.25,1.25,2.15,2.68,2.7,4.28.55,1.61.83,3.23.83,4.86,0,1.39-.24,2.71-.72,3.96-.48,1.25-1.17,2.35-2.05,3.31-.89.96-1.94,1.76-3.17,2.41-1.22.65-2.58,1.07-4.07,1.26l.14.14c.33-.05,1.13.1,2.38.43,1.25.34,2.56.97,3.92,1.91,1.37.94,2.59,2.23,3.67,3.89,1.08,1.66,1.62,3.78,1.62,6.37,0,2.35-.43,4.42-1.3,6.19-.86,1.78-2.08,3.28-3.63,4.5-1.56,1.22-3.45,2.15-5.65,2.77-2.21.62-4.66.94-7.34.94h-20.59V0ZM68.33,23.33c4.37,0,7.63-.97,9.79-2.92s3.24-4.5,3.24-7.67c0-1.87-.36-3.44-1.08-4.72-.72-1.27-1.68-2.3-2.88-3.1-1.2-.79-2.58-1.36-4.14-1.69-1.56-.33-3.2-.5-4.93-.5h-17.42v20.59h17.42ZM68.33,48.67c4.61,0,8.22-.97,10.84-2.92,2.62-1.94,3.92-4.86,3.92-8.75,0-2.21-.46-4.02-1.37-5.44-.91-1.42-2.08-2.53-3.49-3.35-1.42-.82-3-1.38-4.75-1.69-1.75-.31-3.47-.47-5.15-.47h-17.42v22.61h17.42Z"/>
+        <path fill="#1E3229" d="M0,0h3.17v51.41H0V0Z"/>
+        <path fill="#1E3229" d="M47.73,0h20.59c3.07,0,5.64.38,7.7,1.15,2.06.77,3.72,1.78,4.97,3.02,1.25,1.25,2.15,2.68,2.7,4.28.55,1.61.83,3.23.83,4.86,0,1.39-.24,2.71-.72,3.96-.48,1.25-1.17,2.35-2.05,3.31-.89.96-1.94,1.76-3.17,2.41-1.22.65-2.58,1.07-4.07,1.26l.14.14c.33-.05,1.13.1,2.38.43,1.25.34,2.56.97,3.92,1.91,1.37.94,2.59,2.23,3.67,3.89,1.08,1.66,1.62,3.78,1.62,6.37,0,2.35-.43,4.42-1.3,6.19-.86,1.78-2.08,3.28-3.63,4.5-1.56,1.22-3.45,2.15-5.65,2.77-2.21.62-4.66.94-7.34.94h-20.59V0ZM68.33,23.33c4.37,0,7.63-.97,9.79-2.92s3.24-4.5,3.24-7.67c0-1.87-.36-3.44-1.08-4.72-.72-1.27-1.68-2.3-2.88-3.1-1.2-.79-2.58-1.36-4.14-1.69-1.56-.33-3.2-.5-4.93-.5h-17.42v20.59h17.42ZM68.33,48.67c4.61,0,8.22-.97,10.84-2.92,2.62-1.94,3.92-4.86,3.92-8.75,0-2.21-.46-4.02-1.37-5.44-.91-1.42-2.08-2.53-3.49-3.35-1.42-.82-3-1.38-4.75-1.69-1.75-.31-3.47-.47-5.15-.47h-17.42v22.61h17.42Z"/>
         <path fill="#e8c27a" d="M38.66,41.11c.72-1.68,1.31-3.44,1.76-5.29.13-.52.24-1.04.34-1.56,1.63-.42,2.84-1.89,2.84-3.65,0-2.09-1.69-3.78-3.78-3.78s-3.78,1.69-3.78,3.78c0,1.49.87,2.77,2.12,3.38-.04.21-.08.43-.12.64-.31,1.44-.73,2.83-1.26,4.18l-12.24-15.05c1.25-.91,2.51-1.81,3.78-2.7,1.27-.89,2.41-1.87,3.42-2.95s1.84-2.29,2.48-3.64c.65-1.34.97-2.93.97-4.75,0-1.44-.3-2.71-.9-3.82-.6-1.1-1.4-2.03-2.41-2.77-1.01-.74-2.16-1.31-3.46-1.69-1.3-.38-2.64-.58-4.03-.58s-2.66.22-3.96.65c-1.3.43-2.45,1.03-3.46,1.8-1.01.77-1.82,1.69-2.45,2.77s-.94,2.29-.94,3.64.22,2.68.65,3.85c.43,1.18.98,2.3,1.66,3.38.67,1.08,1.42,2.11,2.23,3.1.82.98,1.63,1.98,2.45,2.99-1.49.96-3.02,1.94-4.61,2.95s-3.02,2.14-4.32,3.38c-1.3,1.25-2.36,2.66-3.2,4.25s-1.26,3.43-1.26,5.54.4,4.07,1.19,5.72c.79,1.66,1.87,3.02,3.24,4.1s2.98,1.9,4.82,2.45c1.85.55,3.85.83,6.01.83,3.17,0,6-.76,8.5-2.27,2.5-1.51,4.54-3.59,6.12-6.23l6.26,7.63h3.67l-8.35-10.3ZM18.79,16.31c-.67-.98-1.25-2.02-1.73-3.1-.48-1.08-.72-2.24-.72-3.49,0-.96.24-1.84.72-2.63.48-.79,1.09-1.48,1.84-2.05.74-.58,1.59-1.02,2.56-1.33.96-.31,1.94-.47,2.95-.47s1.99.16,2.95.47c.96.31,1.81.76,2.56,1.33s1.36,1.26,1.84,2.05c.48.79.72,1.67.72,2.63,0,1.44-.3,2.76-.9,3.96-.6,1.2-1.37,2.28-2.3,3.24-.94.96-1.96,1.84-3.06,2.63-1.1.79-2.18,1.52-3.24,2.2-.58-.86-1.25-1.74-2.02-2.63-.77-.89-1.49-1.82-2.16-2.81ZM34.49,43.02c-.53.89-1.32,1.84-2.38,2.84-1.06,1.01-2.39,1.93-4,2.77-1.61.84-3.49,1.26-5.65,1.26-1.58,0-3.12-.24-4.61-.72-1.49-.48-2.82-1.17-4-2.09-1.18-.91-2.12-2.04-2.84-3.38-.72-1.34-1.08-2.86-1.08-4.54,0-1.82.38-3.42,1.15-4.79s1.74-2.6,2.92-3.71c1.18-1.1,2.47-2.1,3.89-2.99,1.42-.89,2.79-1.76,4.14-2.63l13.25,16.49c0,.1-.26.59-.79,1.48Z"/>
       </svg>
       <div class="lk-cap" data-i18n="lk-wm-only-light">Wordmark Only · Light</div>
@@ -1270,12 +1281,12 @@
           <linearGradient id="lg-lk3p3-r" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
           <linearGradient id="lg-lk3p3-dot" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient>
         </defs>
-        <path d="M21.03,2.53l-14.86,30.68" stroke="#1a2540" stroke-width="2.53" stroke-linecap="round" fill="none"/>
+        <path d="M21.03,2.53l-14.86,30.68" stroke="#1E3229" stroke-width="2.53" stroke-linecap="round" fill="none"/>
         <path d="M21.03,2.53l15.81,30.68" stroke="url(#lg-lk3p3-r)" stroke-width="2.53" stroke-linecap="round" fill="none"/>
-        <line x1=".47" y1="33.21" x2="42.22" y2="33.21" stroke="#1a2540" stroke-width=".95" stroke-linecap="round"/>
+        <line x1=".47" y1="33.21" x2="42.22" y2="33.21" stroke="#1E3229" stroke-width=".95" stroke-linecap="round"/>
         <circle fill="url(#lg-lk3p3-dot)" cx="21.03" cy="2.21" r="2.21"/>
         <!-- ILLUMINATE BRIDGE text — exact letter-spacing from original -->
-        <text transform="translate(45.11 21.43)" fill="#1a2540" font-family="'Helvetica Neue',Helvetica,sans-serif" font-size="9.96">
+        <text transform="translate(45.11 21.43)" fill="#1E3229" font-family="'Helvetica Neue',Helvetica,sans-serif" font-size="9.96">
           <tspan letter-spacing=".53em">ILLUMIN</tspan><tspan letter-spacing=".44em">A</tspan><tspan letter-spacing=".53em">TE </tspan><tspan font-weight="500" letter-spacing=".53em">BRIDGE</tspan>
         </text>
       </svg>
@@ -1310,10 +1321,10 @@
     <!-- Monochrome -->
     <div class="lk mid reveal">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 62.27 50.28" style="width:90px;height:auto;">
-        <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-        <path d="M30.68,3.69l23.06,44.75" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-        <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
-        <circle fill="#1a2540" cx="30.68" cy="3.23" r="3.23"/>
+        <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <path d="M30.68,3.69l23.06,44.75" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+        <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
+        <circle fill="#1E3229" cx="30.68" cy="3.23" r="3.23"/>
       </svg>
       <div class="lk-cap" data-i18n="lk-mono">Monochrome · Neutral</div>
     </div>
@@ -1325,11 +1336,11 @@
 <section class="palette-bg">
   <div class="section reveal">
     <div class="sec-label" data-i18n="sec-colors">03 · Color System</div>
-    <h2 class="sec-h" data-i18n="p3-colors-h">Navy and gold —<br/>humanity in two colors.</h2>
-    <p class="sec-p" data-i18n="p3-colors-p">The two-tone mark makes the palette its own story. Navy is the quiet, grounding side of every human connection. Gold is the warmth that draws people forward.</p>
+    <h2 class="sec-h" data-i18n="p3-colors-h">Forest and gold —<br/>humanity in two colors.</h2>
+    <p class="sec-p" data-i18n="p3-colors-p">The two-tone mark makes the palette its own story. Forest is the quiet, grounding side of every human connection. Gold is the warmth that draws people forward.</p>
   </div>
   <div class="swatches" style="max-width:1100px;margin:0 auto;padding:0 60px 96px;">
-    <div class="sw" style="background:#1a2540;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Deep Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#1A2540</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Left Leg · Grounding</div></div>
+    <div class="sw" style="background:#1E3229;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Forest</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#1E3229</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Left Leg · Grounding</div></div>
     <div class="sw" style="background:#2E3D68;"><div class="sw-name" style="color:rgba(255,255,255,0.9);">Mid Navy</div><div class="sw-hex" style="color:rgba(255,255,255,0.6);">#2E3D68</div><div class="sw-role" style="color:rgba(255,255,255,0.4);">Support · Depth</div></div>
     <div class="sw" style="background:#c8963e;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#C8963E</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Right Leg · Warmth</div></div>
     <div class="sw" style="background:#e8c27a;"><div class="sw-name" style="color:rgba(255,255,255,0.95);">Gold Light</div><div class="sw-hex" style="color:rgba(255,255,255,0.7);">#E8C27A</div><div class="sw-role" style="color:rgba(255,255,255,0.5);">Apex Glow · Light</div></div>
@@ -1383,9 +1394,9 @@
         <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
           <svg viewBox="0 0 62.27 50.28" style="width:72px;height:auto;">
             <defs><linearGradient id="lg-r1p3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
-            <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
             <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-r1p3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
             <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
           </svg>
           <span style="font-size:7.5px;letter-spacing:2px;color:var(--gold);">✓ Correct</span>
@@ -1393,9 +1404,9 @@
         <div style="display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0.4;">
           <!-- Mirrored / wrong: both legs same angle -->
           <svg viewBox="0 0 62.27 50.28" style="width:72px;height:auto;">
-            <path d="M31,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M31,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
             <path d="M31,3.69l22,44.75" stroke="#c8963e" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
             <circle fill="#c8963e" cx="31" cy="3.23" r="3.23"/>
           </svg>
           <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">✗ Symmetric</span>
@@ -1409,9 +1420,9 @@
         <div style="border:1px dashed #b8873a;padding:24px 28px;position:relative;">
           <svg viewBox="0 0 62.27 50.28" style="width:80px;height:auto;">
             <defs><linearGradient id="lg-r2p3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
-            <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
             <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-r2p3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
             <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
           </svg>
           <div style="position:absolute;top:3px;left:50%;transform:translateX(-50%);font-size:6.5px;color:#b8873a;letter-spacing:1.5px;white-space:nowrap;">clear space = height × 0.5</div>
@@ -1424,9 +1435,9 @@
       <div style="display:flex;align-items:center;justify-content:center;gap:36px;padding:28px 0;opacity:0.4;">
         <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
           <svg viewBox="0 0 62.27 50.28" style="width:100px;height:36px;">
-            <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+            <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
             <path d="M30.68,3.69l23.06,44.75" stroke="#c8963e" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+            <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
           </svg>
           <span style="font-size:7px;letter-spacing:2px;color:#C0392B;">Stretched</span>
         </div>
@@ -1474,12 +1485,12 @@
           <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
             <svg viewBox="0 0 62.27 50.28" style="width:32px;height:auto;">
               <defs><linearGradient id="lg-cb3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
-              <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
               <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-cb3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-              <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+              <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
               <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
             </svg>
-            <span style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:9px;letter-spacing:5px;color:#1a2540;text-transform:uppercase;">I &amp; B</span>
+            <span style="font-family:'Helvetica Neue',Helvetica,sans-serif;font-size:9px;letter-spacing:5px;color:#1E3229;text-transform:uppercase;">I &amp; B</span>
           </div>
           <div class="card-person-name">山田 太郎</div>
           <div class="card-role">代表取締役 · CEO</div>
@@ -1497,9 +1508,9 @@
           <div class="stamp-circle">
             <svg viewBox="0 0 62.27 50.28" style="width:52px;height:auto;">
               <defs><linearGradient id="lg-st3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
-              <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+              <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
               <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-st3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-              <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+              <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
               <circle fill="#c8963e" cx="30.68" cy="3.23" r="3.23"/>
             </svg>
             <div class="stamp-inner-text">株式会社</div>
@@ -1519,7 +1530,7 @@
         <div class="mock-label" data-i18n="mock-fav">Favicon / App Icon</div>
         <div class="fav-row">
           <div class="fav-box">
-            <div style="width:64px;height:64px;background:#1a2540;border-radius:14px;display:flex;align-items:center;justify-content:center;">
+            <div style="width:64px;height:64px;background:#1E3229;border-radius:14px;display:flex;align-items:center;justify-content:center;">
               <svg viewBox="2 0 58 52" style="width:44px;height:auto;">
                 <defs><linearGradient id="lg-fv3-64" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
                 <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="4" stroke-linecap="round" fill="none"/>
@@ -1531,7 +1542,7 @@
             <div class="fav-sz">64px</div>
           </div>
           <div class="fav-box">
-            <div style="width:40px;height:40px;background:#1a2540;border-radius:9px;display:flex;align-items:center;justify-content:center;">
+            <div style="width:40px;height:40px;background:#1E3229;border-radius:9px;display:flex;align-items:center;justify-content:center;">
               <svg viewBox="2 0 58 52" style="width:28px;height:auto;">
                 <defs><linearGradient id="lg-fv3-40" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
                 <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="4.5" stroke-linecap="round" fill="none"/>
@@ -1543,7 +1554,7 @@
             <div class="fav-sz">40px</div>
           </div>
           <div class="fav-box">
-            <div style="width:24px;height:24px;background:#1a2540;border-radius:5px;display:flex;align-items:center;justify-content:center;">
+            <div style="width:24px;height:24px;background:#1E3229;border-radius:5px;display:flex;align-items:center;justify-content:center;">
               <svg viewBox="5 0 52 52" style="width:18px;height:auto;">
                 <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="6" stroke-linecap="round" fill="none"/>
                 <path d="M30.68,3.69l23.06,44.75" stroke="#e8c27a" stroke-width="6" stroke-linecap="round" fill="none"/>
@@ -1554,7 +1565,7 @@
             <div class="fav-sz">24px</div>
           </div>
           <div class="fav-box">
-            <div style="width:16px;height:16px;background:#1a2540;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+            <div style="width:16px;height:16px;background:#1E3229;border-radius:3px;display:flex;align-items:center;justify-content:center;">
               <svg viewBox="8 0 46 52" style="width:12px;height:auto;">
                 <path d="M30.68,3.69L9,48.44" stroke="white" stroke-width="7" stroke-linecap="round" fill="none"/>
                 <path d="M30.68,3.69l23.06,44.75" stroke="#e8c27a" stroke-width="7" stroke-linecap="round" fill="none"/>
@@ -1579,9 +1590,9 @@
       <div style="flex-shrink:0;">
         <svg viewBox="0 0 62.27 50.28" style="width:48px;height:auto;">
           <defs><linearGradient id="lg-sig3" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient><linearGradient id="lg-sig3d" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c8963e"/><stop offset="1" stop-color="#e8c27a"/></linearGradient></defs>
-          <path d="M30.68,3.69L9,48.44" stroke="#1a2540" stroke-width="3.69" stroke-linecap="round" fill="none"/>
+          <path d="M30.68,3.69L9,48.44" stroke="#1E3229" stroke-width="3.69" stroke-linecap="round" fill="none"/>
           <path d="M30.68,3.69l23.06,44.75" stroke="url(#lg-sig3)" stroke-width="3.69" stroke-linecap="round" fill="none"/>
-          <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1a2540" stroke-width="1.38" stroke-linecap="round"/>
+          <line x1=".69" y1="48.44" x2="61.58" y2="48.44" stroke="#1E3229" stroke-width="1.38" stroke-linecap="round"/>
           <circle fill="url(#lg-sig3d)" cx="30.68" cy="3.23" r="3.23"/>
         </svg>
       </div>
@@ -1710,6 +1721,7 @@
     document.getElementById('panel-' + num).classList.add('active');
     document.querySelectorAll('.nav-pills .nav-pill').forEach(function(b, i) { b.classList.toggle('active', i + 1 === num); });
     document.querySelectorAll('.nav-drawer .nav-pill').forEach(function(b, i) { b.classList.toggle('active', i + 1 === num); });
+    document.querySelector('.pattern-nav').setAttribute('data-pattern', num);
     document.getElementById('cs-screen').classList.remove('visible');
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setTimeout(function() {
