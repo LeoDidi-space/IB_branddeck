@@ -18,6 +18,7 @@
     --ink: #1A1814;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
+  html, body { overflow-x: hidden; }
   body {
     background:var(--cream); color:var(--ink);
     font-family:'Jost',sans-serif; font-weight:300;
@@ -199,7 +200,7 @@
   .card-role { font-size:7.5px;letter-spacing:3px;color:var(--gold);text-transform:uppercase;margin-bottom:10px; }
   .card-contact { font-size:9px;color:var(--muted);line-height:1.9; }
   .card-co { font-size:7px;letter-spacing:3px;color:var(--muted);text-transform:uppercase; }
-  .stamp-row { background:var(--white); padding:44px; border-radius:4px; display:flex; align-items:center; justify-content:center; gap:48px; }
+  .stamp-row { background:var(--white); padding:44px; border-radius:4px; display:flex; align-items:center; justify-content:center; gap:48px; flex-wrap:wrap; }
   .stamp-circle { width:108px;height:108px;border-radius:50%;border:1.5px solid var(--navy);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px; }
   .stamp-inner-text { font-size:6px;letter-spacing:3.5px;color:var(--navy);text-transform:uppercase;opacity:0.55; }
   .fav-row { background:var(--white); padding:28px 32px; border-radius:4px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
